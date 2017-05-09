@@ -1,0 +1,39 @@
+<html>
+<head>
+<style>
+.holder
+{
+	width:30%;
+	height:20%;
+	
+	margin:5% 5%;
+	padding:5%;
+}
+</style>
+</head>
+<body>
+<div class="holder">
+<form>
+<?php
+include('connection.php');
+$getData=$_GET['data'];
+$sub=mysql_query("select subject_description from subject where subject_id='$getData'");
+$getSub=mysql_fetch_array($sub);
+if(isset($_POST['subBttn']))
+{
+	//header("location:teacher-page.php?qry=subject_change");
+	mysql_query("update subject set subject_description='$_POST[subChange]' where subject_id='$getData'");
+	?>
+<script>
+window.location.href = "teacher-page.php?qry=subject_change";
+</script>
+<?php
+	
+}
+?>
+Edit Subject <input type='text' name='subChange' value="<?php echo $getSub['subject_description'] ?>">
+<input type='submit' name='subBttn' value="Change">
+</form>
+</div>
+</body>
+</html>

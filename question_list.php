@@ -29,9 +29,8 @@ function subchange(itsval)
 }
 </script>
 <body>
-<br />
-<center><h2><U>LIST OF QUESTIONS</U></h2></center>
-Subject:- <select id="bysub" onChange="subchange(this.value)">
+<h2 style="text-align:center; padding:0px 0 15px 0; margin:0px; text-decoration:underline;">LIST OF QUESTIONS</h2>
+Subject:- <select id="bysub" onChange="subchange(this.value)" style="margin-bottom:15px;">
 <?php  
 
 $sub=mysqli_query($conn, "select subject_description,subject_id from subject where subject_id in (select distinct subject_id from question_master where created_by = '$user_name')");
@@ -41,7 +40,7 @@ while($getSub=mysqli_fetch_array($sub))
 	
 }
 ?>
-</select><p>
+</select>
 <div id="ques_by_sub">
 
 <?php
@@ -54,13 +53,13 @@ $sel=mysqli_query($conn, $ques_list);
 
 $count_sno=1;
 echo "<table border=1>" ;
-echo "<tr><th>Sno</th><th>Question Description</th><th>Modify</th><th>Delete</th><tr>";
+echo "<tr><th>&nbsp; Sno &nbsp;</th><th>&nbsp; Question Description &nbsp;</th><th>Modify</th><th>Delete</th><tr>";
 while($row=mysqli_fetch_array($sel))
 {
-echo "<tr><td>".$count_sno."</td><td>";
+echo "<tr><td>&nbsp;".$count_sno."</td><td>";
 echo $row["question_desc"];
-echo "</td><td><a href='teacher-page.php?res=$row[question_id]&qry=qlst_1'>Modify</a>";
-echo "</td><td><a href='teacher-page.php?res=$row[question_id]&qry=qlst_2'>Delete</a></td></tr>";
+echo "</td><td><a href='teacher-page.php?res=$row[question_id]&qry=qlst_1'>&nbsp;Modify &nbsp;</a>";
+echo "</td><td><a href='teacher-page.php?res=$row[question_id]&qry=qlst_2'>&nbsp; Delete &nbsp;</a></td></tr>";
 $count_sno+=1;
 }
 echo "</table>" ;

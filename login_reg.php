@@ -10,9 +10,9 @@
   <div class="modal fade" id="login" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Login or Register</h4>
+        <div class="modal-header" style="background:#006699;">
+          <button type="button" class="close" data-dismiss="modal" style="color:#FFFFFF;">&times;</button>
+          <h4 class="modal-title" style="color:#FFFFFF;">Login or Register</h4>
         </div>
         <div class="modal-body">
         <div class="container-fluid">

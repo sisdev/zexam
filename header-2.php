@@ -7,7 +7,7 @@ include("connection.php");
 <!DOCTYPE html>
 <html lang="en">
  <head>
- <title>Header</title>
+ <title>Online Exam</title>
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js" type="text/javascript">
 </script>
  
@@ -27,10 +27,10 @@ include("connection.php");
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 </button>
-              <a href="index.php" class="navbar-brand"><img src="images/logo.png" alt="Sisoft Learning" title="Sisoft Learning" width="230" /></a>
+              <a href="#" class="navbar-brand"><img src="images/logo.png" alt="Sisoft Learning" title="Sisoft Learning" width="200" /></a>
                         </div><!--navbar-header-->
                         
-                        <div class="navbar-collapse collapse" id="templatemo-nav-bar">
+                        <div class="navbar-collapse collapse" id="templatemo-nav-bar" style="border-color:#f8f8f8;">
                             <ul class="nav navbar-nav navbar-right" style="margin-top:16px;">
                                 <li><a href="javascript:;"><span class="glyphicon glyphicon-envelope"> info@sisoft.in</span></a></li>
 				                <li><a href="javascript:;"><span class="glyphicon glyphicon-earphone"> 09999-283-283</span></a></li>

@@ -25,18 +25,9 @@ $(".common:checked").each(function() {
 <style>
 .main
 {
-width:95%;
-height:85%;
-padding:1% 1%;
-}
+width:95%;}
 .form
-{
-width:27%;
-
-float:left;
-
-
-}
+{float:left;  padding-left:25px;}
 .ques{
 
 
@@ -82,17 +73,16 @@ error_reporting(1);
 
 ?>
 <div class="main">
-<h2><center>CREATE TEST PAPER</center></h2>
+<h2 style="text-align:center; padding:0px 0 20px 0; margin:0px;">CREATE TEST PAPER</h2>
 <div class="form">
-  <table width="367" border="0">
+  <table  border="0">
     <tr>
-      <td width="131">Paper Description:</td>
-      <td width="226"><input type="text" name="paper_desc" required=required>
-        </input></td>
+      <td>Paper Description: </td>
+      <td><input type="text" name="paper_desc" required=required style="margin-bottom:10px;"/></td>
     </tr>
     <tr>
       <td>Subject:</td>
-      <td><select name="subjectID" ID="subjectof" > <!--  onChange="showAll()" -->
+      <td><select name="subjectID" ID="subjectof" style="margin-bottom:10px;"/> <!--  onChange="showAll()" -->
 	  <option value="none">select...</option>
         <?php 
 	$arr=mysqli_query($conn, "select subject_id,subject_description from subject");
@@ -104,10 +94,10 @@ error_reporting(1);
       </select>
 &nbsp;</td>
     </tr>
+	
     <tr>
       <td>No. of Questions:</td>
-      <td><input type="text" name="no_of_ques" id="getques" required=required>
-        </input>
+      <td><input type="text" name="no_of_ques" id="getques" required=required style="margin-bottom:10px;"/>
 		<script>
 		$(document).ready(function(){
 			
@@ -156,8 +146,7 @@ error_reporting(1);
     <tr>
 	
       <td>Duration:</td>
-      <td><input type="text" name="duration">
-        </input>(Mins)</td>
+      <td><input type="text" name="duration" style="margin-bottom:10px;"/> (Mins)</td>
     </tr>
     <tr>
       <td>Marks:</td>
@@ -173,7 +162,7 @@ error_reporting(1);
   </table>
  
   <input type="button" id="autobttn" value="Randomly select" name="random">
-  <input type="button" id="manualbttn" value="manual" name="manual" onclick="showAll()">
+  <input type="button" id="manualbttn" value="manual" name="manual" onClick="showAll()">
   
   <?php
   
@@ -227,7 +216,7 @@ Selected Questions:
 		
 		
 		</div>
-		<input type="submit"   name="submit_it" value="proceed" style="margin-top:10" onclick="return process()">
+		<input type="submit"   name="submit_it" value="proceed" style="margin-top:10" onClick="return process()">
 	
 		<?php  
 		

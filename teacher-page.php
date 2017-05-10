@@ -20,6 +20,12 @@ $res=mysqli_fetch_array($chk);
 $exam_role = $res['exam_role'] ;
 
 ?>
+
+<?php include('header-2.php'); ?>
+
+
+<?php include('login_reg.php'); ?>
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -33,50 +39,13 @@ $exam_role = $res['exam_role'] ;
   <title>Assessment Web</title>
   </head>
   <body>
-   <nav class="navbar navbar-default"  >
-  
-  <div class="container-fluid">
-  
-    <div class="navbar-header">
-	
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-	  
-      <a class="navbar-brand" href="#"><img src="images/logo.png" width="180px"></img></a>
-	  
-    </div>
-<div class="col-sm-2"></div>
-<div class="col-sm-8"><h2 style="position:absolute;" class="text-info">Online Exam/Assessment System</h2></div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	
-      <ul class="nav navbar-nav navbar-right">
-    
-        <li><a href="#"><?php 
+<div class="container">	
+  <div><h2 style="color:#0066CC; margin-top:25px; margin-bottom:25px; text-align:center;">Online Exam/Assessment System</h2></div>
+</div>
 
- echo "USER ID : ".$_SESSION['userid'];
- ?></a></li>
-       
- <li class="click"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    <?php  echo $_SESSION['email'];?> <span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu">
-	
- 
-      <li><a href="index.php?session=1">Log out</a></li>
-     
-    </ul></li>
-		 </ul>
-      
-     
-    </div>
-	
-  </div>
-  
-</nav>
+
+<div class="container">
  <section>
  <div class="container-fluid">
  <div class="row">
@@ -227,9 +196,5 @@ case  "add_ques":
  
  
  </div>
- 
- 
- 
- 
- 
- </section>
+</section>
+</div>

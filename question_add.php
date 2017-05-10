@@ -31,7 +31,7 @@ function ShowTopic(str) {
 </head>
 <body onLoad="ShowTopic(1)">
 
-<center><h2>ADD QUESTION</h2></center>
+<h2 style="text-align:center; padding:0px 0 15px 0; margin:0px;">ADD QUESTION</h2>
 <?php
 if(isset($_POST['submit']))
 {
@@ -96,16 +96,16 @@ mysqli_query($conn, "insert into choice_master (choice_desc,correct_choice,quest
 ?>
 <div id="result"></div>
 <form method="post" name="myform">
-<table width="965" border="0">
+<table border="0">
   <tr>
     <td colspan="2"><form name="form1" method="post" action="">
         <label></label>
     </td>
     <td width="37">&nbsp;</td>
   </tr>
-  <tr>
-    <td width="215"><label></label></td>
-    <td width="631">Subject:
+  <tr style="margin-bottom:10px;">
+    <td><label></label></td>
+    <td>Subject:
       <select name="subjectID" id="aa" onclick="ShowTopic(this.value)">
 	  
 	<?php 
@@ -121,7 +121,9 @@ mysqli_query($conn, "insert into choice_master (choice_desc,correct_choice,quest
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Topic: 
 	  <a id="selTopic">
 	  
-	   <select><option>select...</option></select>	  
+	   <select>
+		   <option>select...</option>
+	   </select>	  
 	  </div>
 	  
 
@@ -153,11 +155,13 @@ $(document).ready(function(){
 </script>
 
     </td>
+	
     <td>&nbsp;</td>
   </tr>
+  
   <tr>
-    <td>Question:</td>
-    <td><textarea name="question" placeholder="Enter question" rows="5" cols="100" required=required></textarea>&nbsp;</td>
+    <td>Question: &nbsp;&nbsp;</td>
+    <td><textarea name="question" placeholder="Enter question" rows="5"  cols="100" required="required" style="margin-top:15px;"></textarea>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -165,21 +169,25 @@ $(document).ready(function(){
     <td><textarea name="answer1" cols="100"></textarea>&nbsp;</td>
     <td>&nbsp;<input type="checkbox" class="check" name="ans"  value="1"></td>
   </tr>
+  
   <tr>
     <td>Answer 2: </td>
     <td><textarea name="answer2" cols="100"></textarea>&nbsp;</td>
     <td>&nbsp;<input type="checkbox" class="check" name="ans" value="2"></td>
   </tr>
+  
   <tr>
     <td>Answer 3: </td>
     <td><textarea name="answer3" cols="100"></textarea>&nbsp;</td>
     <td>&nbsp;<input type="checkbox" class="check" name="ans" value="3"></td>
   </tr>
+  
   <tr>
     <td>Answer 4: </td>
     <td><textarea name="answer4" cols="100"></textarea>&nbsp;</td>
     <td>&nbsp;<input type="checkbox" class="check" name="ans" value="4"></td>
   </tr>
+  
   <tr>
     <td>&nbsp;</td>
     <td><input type="submit" name="submit" value="submit">
@@ -187,17 +195,13 @@ $(document).ready(function(){
       <input type="reset" name="reset" value="reset">&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
   
+  <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
+  
 </table>
 </form>
 

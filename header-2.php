@@ -3,12 +3,11 @@ error_reporting(0);
 session_start();
 include("connection.php");
 ?>
- <!--<script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>-->
 <!DOCTYPE html>
 <html lang="en">
  <head>
  <title>Online Exam</title>
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js" type="text/javascript">
+ <script src="js/jquery-2.2.0.min.js" type="text/javascript">
 </script>
  
  

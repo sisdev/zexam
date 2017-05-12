@@ -3,13 +3,13 @@ include("connection.php");
 error_reporting(1);
 $get_subID=$_REQUEST["q"]; 
 		
-		$sub=mysql_query("select Q.question_id,Q.question_desc from question_master Q,subject S where Q.subject_id=S.subject_id and
+		$sub=mysqli_query($conn, "select Q.question_id,Q.question_desc from question_master Q,subject S where Q.subject_id=S.subject_id and
 		S.subject_id='$get_subID'
 		");
 		$count_sno=1;
 		echo "<table border=1>";
 		echo "<tr><th>Sno</th><th>Question Description</th><th>Modify</th><th>Delete</th><tr>";
-	while($get_record=mysql_fetch_array($sub))
+	while($get_record=mysqli_fetch_array($sub))
 	{
 	echo "<tr><td>".$count_sno."</td><td>";
 echo $get_record["question_desc"];

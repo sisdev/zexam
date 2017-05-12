@@ -59,8 +59,8 @@ $testsession=$_REQUEST['sessionid'];
 //$assign_dtm=mysql_query("select test_assign_dtm from test_assign where test_sessionid='".$testsession."'");
 //$assigndtm=mysql_fetch_array($assign_dtm);
 
-$repeat=mysql_query("select * from test_taken where session_id='".$testsession."'");
-$chk=mysql_fetch_array($repeat);
+$repeat=mysqli_query($conn, "select * from test_taken where session_id='".$testsession."'");
+$chk=mysqli_fetch_array($repeat);
 if($chk>0)
 {
 	//header("location:teacher-page.php?qry=my_testpaper");
@@ -72,7 +72,7 @@ window.location.href = "teacher-page.php?qry=my_testpaper";
 	exit;
 }
 
-mysql_query("insert into test_taken (test_id,student_id,test_start_dtm,session_id) values('$testid','$stdid','$dtm','$testsession')");
+mysqli_query($conn, "insert into test_taken (test_id,student_id,test_start_dtm,session_id) values('$testid','$stdid','$dtm','$testsession')");
 
  
 ?>
@@ -110,16 +110,16 @@ window.location.href="teacher-page.php?qry=my_testpaper";
  </script>
  <div class="panel panel-primary">
 		  <?php
-		  $duration=mysql_query("select duration from test_paper where paper_id='".$_REQUEST['paperID']."'");
-		  $due=mysql_fetch_array($duration);
+		  $duration=mysqli_query($conn, "select duration from test_paper where paper_id='".$_REQUEST['paperID']."'");
+		  $due=mysqli_fetch_array($duration);
 		   
 		  
-		  $count_que=mysql_query("select question_id from test_paper_questions cp where cp.paper_id='".$_REQUEST['paperID']."' ");
+		  $count_que=mysqli_query($conn, "select question_id from test_paper_questions cp where cp.paper_id='".$_REQUEST['paperID']."' ");
 
 		  ?>
 		<input type="hidden" value=<?php echo $due['duration']; ?> class="duration">
 		
-      <div class="panel-heading">Quick jump  :  No of Questions <?php echo $no_of_ques=mysql_num_rows($count_que);  ?> </div>
+      <div class="panel-heading">Quick jump  :  No of Questions <?php echo $no_of_ques=mysqli_num_rows($count_que);  ?> </div>
 	  
 	    <input type="hidden" value=<?php echo $no_of_ques; ?> id="total_counts">
       <div class="panel-body">
@@ -130,13 +130,13 @@ window.location.href="teacher-page.php?qry=my_testpaper";
 
 
 	  while($no_of_ques!=0) {
-		  $queid=mysql_fetch_array($count_que);
+		  $queid=mysqli_fetch_array($count_que);
 		  $ques_id=$queid['question_id'];
 		  
-		  mysql_query("insert into test_result (ques,testpaper_id,ques_id,sessionid) values ('$quick_count','$testid','$ques_id','$testsession')");
+		  mysqli_query($conn, "insert into test_result (ques,testpaper_id,ques_id,sessionid) values ('$quick_count','$testid','$ques_id','$testsession')");
 		  
-$rslt=mysql_query("select ques,ans,status from test_result where ques='".$quick_count."'");
-	$showst=mysql_fetch_array($rslt);	
+$rslt=mysqli_query($conn, "select ques,ans,status from test_result where ques='".$quick_count."'");
+	$showst=mysqli_fetch_array($rslt);	
 	  ?>
 	<!--  <div class="col-sm-4"><a href="javascript:;" id=bttn<?php echo $quick_count-1; ?>  style="margin-top:15px"   data-index=<?php echo $quick_count; if($showst['status']=='ok') { ?> class="btn btn-info" <?php  } if($showst['status']=='review'){ ?> class="btn btn-warning" <?php } else {  ?> class="btn btn-default"  <?php } ?> role="button"><?php echo $quick_count; ?></a></div>  -->
 	  <div class="col-sm-4"><a href="javascript:;" id=bttn<?php echo $quick_count-1; ?>  style="margin-top:15px"   data-index=<?php echo $quick_count; ?> class="btn btn-default"   role="button"><?php echo $quick_count; ?></a></div>

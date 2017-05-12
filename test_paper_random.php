@@ -10,20 +10,20 @@ $loop_ques=0;
 $count=1;
 $question_array=array();
 	  $ques_count=$get_ques;
-	  $sel_q= mysql_query("select question_id from question_master where subject_id='$get_sub'");
+	  $sel_q= mysqli_query($conn, "select question_id from question_master where subject_id='$get_sub'");
 	 
-	 $forRand= mysql_query("select question_id from question_master where subject_id='$get_sub'");
+	 $forRand= mysqli_query($conn, "select question_id from question_master where subject_id='$get_sub'");
 
 $randArr=array();		
 $chkArr=array();
-		while($row1=mysql_fetch_array($forRand)) 
+		while($row1=mysqli_fetch_array($forRand)) 
 		{
  $randArr[]= $row1['question_id']; 
 		}
 		
 	 
 	   echo "<table>";
-	 while($row=mysql_fetch_array($sel_q))
+	 while($row=mysqli_fetch_array($sel_q))
 	 {
 	$rand= $randArr[array_rand($randArr)]; 
 	
@@ -33,11 +33,11 @@ $chkArr=array();
 			
 		}
 		$chkArr[]=$rand;
-		 $repeat= mysql_query("select question_id,question_desc from question_master where question_id='$rand' and subject_id='$get_sub'");
+		 $repeat= mysqli_query($conn, "select question_id,question_desc from question_master where question_id='$rand' and subject_id='$get_sub'");
 		 
 		 
 		 
-		$fetch=mysql_fetch_array($repeat);
+		$fetch=mysqli_fetch_array($repeat);
 		$question_array[]=$fetch['question_id'];
 		echo "<tr><td>".$count. "</td><td> ".$fetch['question_desc']."</td></tr>";
 		$loop_ques++;

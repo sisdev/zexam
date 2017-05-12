@@ -1,7 +1,3 @@
-
-
-
-
 <h1><center>Assesement App - Question Paper Upload </center></h1>
 <div class="container" style="margin-top:50px">
 <div class="row">

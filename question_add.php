@@ -1,5 +1,14 @@
 <?php 
 include('connection.php');
+if(!isset($_SESSION['email']))
+{
+	header("location:index.php");
+}
+else
+{
+	$user_name=$_SESSION['email'] ;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -109,7 +118,9 @@ mysqli_query($conn, "insert into choice_master (choice_desc,correct_choice,quest
       <select name="subjectID" id="aa" onclick="ShowTopic(this.value)">
 	  
 	<?php 
-	$arr=mysqli_query($conn, "select subject_id,subject_description from subject");
+	$arr=mysqli_query($conn, "select subject_description,subject_id from subject");
+	// where subject_id in (select distinct subject_id from question_master where created_by = '$user_name')
+	
 	while($row=mysqli_fetch_array($arr))
 	{
 	echo "<option value=".$row["subject_id"].">".$row["subject_description"]."</option>";

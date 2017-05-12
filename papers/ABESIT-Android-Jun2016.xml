@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Questionare duration="15" course="Android">
+  <Question number="1">
+    <QStr>Is it possible to create an activity without setContentView(r.layout.main) xml file?&#13;
+	 &#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>Yes</Item>
+    <Item>No</Item>
+    <Item>May be</Item>
+    <Item>Can’t say</Item>
+    <Answer>1</Answer>
+  </Question>
+  <Question number="2">
+    <QStr>What is the immediate base class for Activity and services?&#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>CONTEXTAPP</Item>
+    <Item>CONTEXT</Item>
+    <Item>RESOURCE</Item>
+    <Item>ANDROID</Item>
+    <Answer>1</Answer>
+  </Question>
+  <Question number="3">
+    <QStr>Which one of these automatically disappear after a time out ?&#13;
+    &#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>Toast </Item>
+    <Item>Statusbar notification &#13;
+</Item>
+    <Item>Dialog</Item>
+    <Item>None of These</Item>
+    <Answer>1</Answer>
+  </Question>
+  <Question number="4">
+    <QStr>Activity life cycle are being managed by ?</QStr>
+    <topic>UI</topic>
+    <Item>Activity Manager&#13;
+</Item>
+    <Item>Content Provider</Item>
+    <Item>XMPP manager</Item>
+    <Item>Package manager</Item>
+    <Answer>1</Answer>
+  </Question>
+  <Question number="5">
+    <QStr>The common classes for SQLITE Database access are&#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>SqiteDatabase</Item>
+    <Item>SqliteOpenHelper</Item>
+    <Item>ContentValues</Item>
+    <Item>All the above</Item>
+    <Answer>4</Answer>
+  </Question>
+  <Question number="6">
+    <QStr>Which layer does Dalvik Virtual Machine sit?&#13;
+&#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>Driver Layer</Item>
+    <Item>Framework Layer</Item>
+    <Item>Library Layer</Item>
+    <Item>Application Layer</Item>
+    <Answer>3</Answer>
+  </Question>
+  <Question number="7">
+    <QStr>Which function calls to start a service in android app&#13;
+&#13;
+&#13;
+&#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>bindService&#13;
+</Item>
+    <Item>startService</Item>
+    <Item>runService</Item>
+    <Item/>
+    <Answer>4</Answer>
+  </Question>
+  <Question number="8">
+    <QStr/>
+    <topic>UI</topic>
+    <Item>Activity.onStop()</Item>
+    <Item>Activity.onPause()</Item>
+    <Item>Activity.onDestroy()</Item>
+    <Item>Activity.onShutdown()</Item>
+    <Answer>3</Answer>
+  </Question>
+  <Question number="9">
+    <QStr>What is the main element in the manifest file?&#13;
+&#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>Application</Item>
+    <Item>Intent-Filter</Item>
+    <Item>Activity</Item>
+    <Item>Service</Item>
+    <Answer>1</Answer>
+  </Question>
+  <Question number="10">
+    <QStr>What is the full form of ANR ?</QStr>
+    <topic>UI</topic>
+    <Item>Application Natural Resources</Item>
+    <Item>Application Not Responding</Item>
+    <Item>Automatic Network Routing</Item>
+    <Item>None  of These.</Item>
+    <Answer>2</Answer>
+  </Question>
+  <Question number="11">
+    <QStr>Which tag used in manifest file to register Broadcast Receivers?&#13;
+	&#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>Service tag</Item>
+    <Item>Receiver tag</Item>
+    <Item>Activity tag</Item>
+    <Item>Widgets tag</Item>
+    <Answer>2</Answer>
+  </Question>
+  <Question number="12">
+    <QStr>Can Android Emulator make actual phone call ?&#13;
+        &#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>Yes</Item>
+    <Item>No</Item>
+    <Item>Maybe</Item>
+    <Answer>2</Answer>
+  </Question>
+  <Question number="13">
+    <QStr>What is the most flexible image format use in android devices(keep compatibiltity issues in mind)&#13;
+&#13;
+</QStr>
+    <topic>UI</topic>
+    <Item>.jpg or .jpeg</Item>
+    <Item>.png</Item>
+    <Item>.gif</Item>
+    <Item>9.png</Item>
+    <Answer>4</Answer>
+  </Question>
+</Questionare>

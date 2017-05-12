@@ -18,7 +18,7 @@ if (!$chk) {
 $res=mysqli_fetch_array($chk);
 
 $exam_role = $res['exam_role'] ;
-
+echo "Role:".$exam_role ;
 ?>
 
 <?php include('header-2.php'); ?>
@@ -76,7 +76,9 @@ $exam_role = $res['exam_role'] ;
 	  
 	  <?php } ?>
       <?php if($exam_role=="student") { ?>
-	    <div class="panel-body"><a href="teacher-page.php?qry=my_testpaper">My Test Papers</a></div>
+	  
+	  	<div class="panel-body"><a href="teacher-page.php?qry=pub_testpaper">Available Test Papers</a></div>
+	    <div class="panel-body"><a href="teacher-page.php?qry=my_testpaper">Assigned Test Papers</a></div>
 	    <div class="panel-body"><a href="teacher-page.php?qry=see_result">See Result</a></div>
 	  
 	  <?php } ?>
@@ -128,6 +130,8 @@ case  "add_ques":
 	case "test_paper_list":
 	include("test_paper_list.php");
 	break;
+
+	
 	case "test_paper_modify":
 	include("test_paper_modify.php");
 	break;
@@ -158,6 +162,14 @@ case  "add_ques":
 	case "list_students":
 	include("list_students.php");
 	break;
+	case "pub_testpaper":
+	include("test_paper_list_pub.php");
+	break;
+
+	case "test_paper_assign_self":
+	include("test_paper_assign_self.php");
+	break;
+
 	case "my_testpaper":
 	include("student_testpapers.php");
 	break;

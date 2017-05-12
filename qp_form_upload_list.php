@@ -10,7 +10,7 @@
     </thead>
     <tbody>
 	<?php
-    $path = realpath('appdev/mobappdata/qpaper/');
+    $path = realpath('mobappdata/qpaper/');
     $dir_handle = @opendir($path) or die("Unable to open $path");
     $directories = array();
     while ($file = readdir($dir_handle)) 

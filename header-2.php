@@ -27,21 +27,19 @@ include("connection.php");
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 </button>
-              <a href="#" class="navbar-brand"><img src="images/logo.png" alt="Sisoft Learning" title="Sisoft Learning" width="200" /></a>
+              <a href="http://www.sisoft.in/" class="navbar-brand"><img src="images/logo.png" alt="Sisoft Learning" title="Sisoft Learning" width="200" /></a>
                         </div><!--navbar-header-->
                         
                         <div class="navbar-collapse collapse" id="templatemo-nav-bar" style="border-color:#f8f8f8;">
                             <ul class="nav navbar-nav navbar-right" style="margin-top:16px;">
-                                <li><a href="javascript:;"><span class="glyphicon glyphicon-envelope"> info@sisoft.in</span></a></li>
-				                <li><a href="javascript:;"><span class="glyphicon glyphicon-earphone"> 09999-283-283</span></a></li>
+                                <li><span class="glyphicon glyphicon-envelope"> info@sisoft.in &nbsp;</span></li>
+				                <li><span class="glyphicon glyphicon-earphone"> 09999-283-283 &nbsp; </span></li>
 							 <?php  
 							 if(isset($_SESSION['login']))  {
 								?>
 								<li class="click"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 								<?php echo $_SESSION['login']; ?> <span class="caret"></span></button>
 								<ul class="dropdown-menu" role="menu">
-								<!--<li><a href="mysisoft.php">My Sisoft</a></li>
-								<li><a href="settings.php?setval=<?php echo $_SESSION['login']; ?>">Chage Password</a></li>-->
 								<li><a href="index.php?session=1">Log out</a></li>
      
 								</ul></li>
@@ -66,7 +64,7 @@ include("connection.php");
 
                                                                        
 									
-									$record=mysqli_query($user_conn, "select id, username,userpass, exam_role from users where username='$lemail' and userpass='$lpass' ");
+									$record=mysqli_query($user_conn, "select id, username,userphone, exam_role from users where username='$lemail' and userpass='$lpass' ");
 									$name=mysqli_fetch_array($record);
 									$count=mysqli_num_rows($record);
 									if($count==1)
@@ -75,27 +73,22 @@ include("connection.php");
 										$_SESSION['userphone'] = $name['userphone'] ;
 										$_SESSION['userid'] = $name['id'] ;
 										$_SESSION['email'] = $name['username'];
+										$_SESSION['exam_role'] = $name['exam_role'] ;
+										
                                         $login_log_qry ="insert into user_login_log(username, userpass, login_dtm, login_ip,login_stat)values('$lemail','$lpass',  now(), '$lipadd','success')" ;
                                         mysqli_query($user_conn, $login_log_qry);
+										
 										header("location:teacher-page.php");
 
 										?>
-								<li class="click"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-									<?php echo $name['username']; ?> <span class="caret"></span></button>
-									<ul class="dropdown-menu" role="menu">
-									  <li><a href="mysisoft.php">My Sisoft</a></li>
-									  <li><a href="settings.php?setval=<?php echo $name['username']; ?>">Chage Password</a></li>
-									  <li><a href="index.php?session=1">Log out</a></li>
-									 
-									</ul></li>
-										<?php
+									<?php
 										
 										
 									}
 									else
 									{
-                                                                        $login_log_qry ="insert into user_login_log(username, userpass, login_dtm, login_ip,login_stat)values('$lemail','$lpass',  now(), '$lipadd','failure')" ;
-                                                                        mysqli_query($user_conn, $login_log_qry);
+                                            $login_log_qry ="insert into user_login_log(username, userpass, login_dtm, login_ip,login_stat)values('$lemail','$lpass',  now(), '$lipadd','failure')" ;
+                                            mysqli_query($user_conn, $login_log_qry);
 
 										?>
 								 <li class="click"> <button  type="button"  id="loginBttn"  class="btn btn-info btn-md" data-toggle="modal" data-target="#login">Login</button></li>		
@@ -137,14 +130,7 @@ include("connection.php");
 								$_SESSION['userphone'] = $name['userphone'] ;
 								header("location:teacher-page.php");
 								?>
-						<li class="click"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							<?php echo $name['username']; ?> <span class="caret"></span></button>
-							<ul class="dropdown-menu" role="menu">
-							  <li><a href="mysisoft.php">My Sisoft</a></li>
-							 <li><a href="settings.php?setval=<?php echo $name['username']; ?>">Change Password</a></li>
-							  <li><a href="index.php?session=1">Log out</a></li>
-							 
-							</ul></li>
+
 								<?php
 								
 								

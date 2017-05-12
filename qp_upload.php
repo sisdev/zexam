@@ -19,7 +19,7 @@ if(isset($_POST['upload']) && $_FILES['userfile']['size'] > 0)
         {
             
   //$target ="../../appdev/mobappdata/qpaper/"; // TARGET LOCATION ..
-  $target ="appdev/mobappdata/qpaper/"; // TARGET LOCATION ..
+  $target ="mobappdata/qpaper/"; // TARGET LOCATION ..
 
     $target = $target . basename( $_FILES['userfile']['name']);
       
@@ -52,7 +52,7 @@ if(isset($_POST['upload']) && $_FILES['userfile']['size'] > 0)
     $query = "INSERT INTO assess_app_qp (course_name,file_name,file_location,upload_dtm,uploaded_by,upload_ip ) 
     VALUES('$coursename','$fileName', 'http://www.sisoft.in/appdev/mobappdata/qpaper/',now(),'$user_name','$ip')";
 
-    mysql_query($query) or die('Error, query failed'); 
+    mysqli_query($conn, $query) or die('Error, query failed'); 
 
     echo "<br>File $fileName uploaded<br>";
  

@@ -43,7 +43,7 @@ where S.subject_id=T.Subject_id and st.test_id=T.paper_id and st.student_id='".$
         <td><?php echo $data["total_marks"]; ?></td>
       <!--  <td><a href="test_paper_view.php?paperID=<?php echo $data['paper_id'] ?>&nextQ=-1" class="btn btn-info" role="button">Select</a></td> -->
 	  <?php
-	  $complete=mysql_num_rows($complete_testpaper);
+	  $complete=mysqli_num_rows($complete_testpaper);
 	if($complete>=1) {
 	
 	  ?>

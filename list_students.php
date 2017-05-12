@@ -14,8 +14,7 @@ require('connection.php');
     <thead>
       <tr>
         <th>Email</th>
-        <th>Institute</th>
-        <th>Registration No.</th>
+        <th>Phone No.</th>
  
         <th>Modify</th>
       </tr>
@@ -23,14 +22,13 @@ require('connection.php');
     <tbody>
       
 	  <?php 
-	  $teachers=mysql_query("select userid,username,institute,reg_no from users where role='student'");
-	  while($tlist=mysql_fetch_array($teachers))
+	  $teachers=mysqli_query($user_conn, "select id,username, userphone from users where exam_role='student'");
+	  while($tlist=mysqli_fetch_array($teachers))
 	  {
 	  ?>
 	  <tr>
         <td><?php echo $tlist['username']; ?></td>
-        <td><?php echo $tlist['institute']; ?></td>
-        <td><?php echo $tlist['reg_no']; ?></td>
+        <td><?php echo $tlist['userphone']; ?></td>
      
         <td><a href="teacher-page.php?qry=modify_std_tchr&std=<?php echo $tlist['userid']; ?>">Modify</a></td>
       </tr>

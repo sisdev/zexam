@@ -8,19 +8,19 @@ $get_val=$_GET['mod'];
 ?>
 <a  href="test_paper_view_xml.php?mod=<?php echo $get_val; ?>" target="_blank">Generate XML</a><p>
 <?php
-$qry=mysql_query("select Q.question_desc,C.question_id from test_paper T,test_paper_questions C,question_master Q where T.paper_id=C.paper_id and Q.question_id=C.question_id and T.paper_id='$get_val'");
+$qry=mysqli_query($conn, "select Q.question_desc,C.question_id from test_paper T,test_paper_questions C,question_master Q where T.paper_id=C.paper_id and Q.question_id=C.question_id and T.paper_id='$get_val'");
 //$qry=mysql_query("select C.question_id,Q.question_desc from create_paper C,question_master Q where C.paper_id='$get_val' and Q.question_id=C.question_id");
 $count=1;
 
-while($val=mysql_fetch_array($qry))
+while($val=mysqli_fetch_array($qry))
 {
 
 $ans_count=1;
 echo $count."-".$val['question_desc']."</br>";
 
 $get_final_ans=1;
-$options=mysql_query("select choice_desc,correct_choice from choice_master where question_id='$val[question_id]' ");
-while($getop=mysql_fetch_array($options))
+$options=mysqli_query($conn, "select choice_desc,correct_choice from choice_master where question_id='$val[question_id]' ");
+while($getop=mysqli_fetch_array($options))
 {
 ?>
 <input <?php if($getop['correct_choice']=='YES') echo "checked"; ?> type=radio name=<?php echo $count; ?> ><?php echo $getop['choice_desc']; ?> </br>

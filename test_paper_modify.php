@@ -5,11 +5,18 @@
 
 <?php
 include("connection.php");
+// boolean $debug=true ;
 
-$modify=mysql_query("select T.paper_desc,T.subject_id,T.duration,T.total_marks,T.no_of_questions from test_paper T where T.paper_id='$_GET[mod]'");
-$get=mysql_fetch_array($modify);
+$test_paper_id = $_GET["mod"] ;
+$qry_test_paper = "select T.paper_desc,T.subject_id,T.duration,T.total_marks,T.no_of_questions from test_paper T where T.paper_id='$test_paper_id'" ;
 
+echo $qry_test_paper ;
+$modify=mysqli_query($conn,$qry_test_paper);
+$get=mysqli_fetch_array($modify);
 
+$tp_sub_id=$get["subject_id"] ;
+
+echo "Test Paper Subject Id:". $tp_sub_id ; 
 
 ?>
 
@@ -24,11 +31,11 @@ $get=mysql_fetch_array($modify);
       <td><select name="subjectID" ID="subjectof"  onChange="showAll()">
 	  <option value="">select...</option>
         <?php 
-	$arr=mysql_query("select S.subject_id,S.subject_description from subject S");
-	while($row=mysql_fetch_array($arr))
+	$arr=mysqli_query($conn, "select S.subject_id,S.subject_description from subject S");
+	while($row=mysqli_fetch_array($arr))
 	{
-	if($get['subject_id']==$row['subject_id'])
-	echo "<option value=".$row["subject_id"]." selected=selected>".$row["subject_description"]."</option>";
+	if($row['subject_id']==$tp_sub_id)
+	echo "<option value=".$row["subject_id"]." selected>".$row["subject_description"]."</option>";
 	else
 	echo "<option value=".$row["subject_id"].">".$row["subject_description"]."</option>";
 	}
@@ -43,7 +50,7 @@ $get=mysql_fetch_array($modify);
 	  $no_of_ques=$_POST['no_of_ques'];
 	  $duration=$_POST['duration'];
 	  $marks=$_POST['marks'];
-	  mysql_query("update test_paper set paper_desc='$desc',subject_id='$sub_id',no_of_questions='$no_of_ques',duration='$duration',total_marks=
+	  mysqli_query($conn, "update test_paper set paper_desc='$desc',subject_id='$sub_id',no_of_questions='$no_of_ques',duration='$duration',total_marks=
 	  '$marks' where paper_id='$_GET[mod]'");	
 	?>
 <script>
@@ -72,7 +79,7 @@ window.location.href = "teacher-page.php?qry=test_paper_list";
 &nbsp;</td>
     </tr>
     <tr>
-      <td><a href="teacher-page.php?qry=test_paper_list">Listing Test Papers</a>&nbsp;</td>
+      <td><a href="teacher-page.php?mod=<?php echo $test_paper_id; ?>&qry=test_paper_view">Test Papers - Question List</a>&nbsp;</td>
       <td><!--  <input type="button" value="Select Questions" name="show_record"></input> -->
 &nbsp;<input type="submit" name="update" value="Update"></td>
     </tr>

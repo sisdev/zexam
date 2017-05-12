@@ -9,9 +9,9 @@ require('connection.php');
  <?php 
 if(isset($_GET['teach']))
 {
-	$select=mysql_query("select username,userpass,institute,subject,userpass from users where userid='".$_GET['teach']."'");
+	$select=mysqli_query($user_conn, "select username,userpass from users where userid='".$_GET['teach']."'");
  
- $datateach=mysql_fetch_array($select);
+ $datateach=mysqli_fetch_array($select);
  ?>
    <h2>Update Teachers Record</h2>
  <form class="form-horizontal" method="post">
@@ -28,29 +28,6 @@ if(isset($_GET['teach']))
   </div>
 </div>
 
-<!-- Select Basic -->
-<div class="form-group">
- 
-  <div class="col-md-10">
-    <select id="selectbasic" name="upd_subject" class="form-control">
-	<?php $sub=mysql_query("select subject_id, subject_description from subject"); 
-	while($subject=mysql_fetch_array($sub))
-	{
-	?>
-      <option <?php if($datateach['subject']==$subject['subject_id']) echo "selected=selected"; ?> value=<?php echo $subject['subject_id']; ?> ><?php echo $subject['subject_description']; ?></option>
-	<?php } ?>
-    </select>
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-
-  <div class="col-md-10">
-  <input id="institute" name="upd_institute" placeholder="Institute" value=<?php echo $datateach['institute']; ?> class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
 
 <!-- Password input-->
 <div class="form-group">
@@ -89,10 +66,10 @@ window.location.href = "teacher-page.php?qry=list_std_teacher";
  {
 	 // header("location:teacher-page.php?qry=list_std_teacher");
 	 $upd_email=$_POST['upd_email'];
-	 $upd_subject=$_POST['upd_subject'];
-	 $upd_institute=$_POST['upd_institute'];
+//	 $upd_subject=$_POST['upd_subject'];
+//	 $upd_institute=$_POST['upd_institute'];
 	 $upd_password=$_POST['upd_password'];
-	$upd_teacher= mysql_query("update users set username='$upd_email',institute='$upd_institute',subject='$upd_subject',userpass='$upd_password' where userid='".$_GET['teach']."'");
+	$upd_teacher= mysqli_query($user_conn, "update users set username='$upd_email',userpass='$upd_password' where id='".$_GET['teach']."'");
 	 
 	?>
 <script>
@@ -106,9 +83,9 @@ window.location.href = "teacher-page.php?qry=list_std_teacher";
 }
 if(isset($_GET['std']))
 {
-	$selstd=mysql_query("select username,userpass,institute,reg_no from users where userid='".$_GET['std']."'");
+	$selstd=mysqli_query($user_conn, "select username,userpass from users where userid='".$_GET['std']."'");
  
- $datastd=mysql_fetch_array($selstd);
+ $datastd=mysqli_fetch_array($selstd);
  ?>
     <div class="container">
  <form method="post">
@@ -123,24 +100,7 @@ if(isset($_GET['std']))
 </div>
 
 </br></br>
- <div class="form-group">
 
-  <div class="col-md-10">
-  <input id="std_regno" name="std_regno"  class="form-control input-md" required="" value=<?php echo $datastd['reg_no']; ?> type="text">
-    
-  </div>
-</div>
-
-</br></br>
- <div class="form-group">
-
-  <div class="col-md-10">
-  <input id="std_institute" name="std_institute"  class="form-control input-md" required="" value=<?php echo $datastd['institute']; ?> type="text">
-    
-  </div>
-</div>
-
-</br></br>
 <div class="form-group">
 
   <div class="col-md-10">
@@ -176,10 +136,8 @@ window.location.href = "teacher-page.php?qry=list_students";
  {
 	 		// header("location:teacher-page.php?qry=list_students");
 	 $std_email=$_POST['std_email'];
-	 $std_regno=$_POST['std_regno'];
-	 $std_institute=$_POST['std_institute'];
 	 $std_password=$_POST['std_password'];
-	$upd_teacher= mysql_query("update users set username='$std_email',institute='$std_institute',reg_no='$std_regno',userpass='$std_password' where userid='".$_GET['std']."'");
+	$upd_teacher= mysqli_query($user_conn, "update users set username='$std_email', userpass='$std_password' where id='".$_GET['std']."'");
 	
 	?>
 <script>

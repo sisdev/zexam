@@ -21,8 +21,8 @@
 include('connection.php');
   error_reporting(1); session_start(); if(isset($_SESSION['login'])) 
 							 {
-								 $record=mysql_query("select userid,username,userpass,as_a from users where username='$_SESSION[name]' and userpass='$_SESSION[pass]' ");
-	$name=mysql_fetch_array($record);
+								 $record=mysqli_query($conn, "select userid,username,userpass,as_a from users where username='$_SESSION[name]' and userpass='$_SESSION[pass]' ");
+	$name=mysqli_fetch_array($record);
 	$_SESSION['userid']=$name['userid'];
 								?>
 <li class="click"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -55,9 +55,9 @@ if(isset($_POST['login']))
 	$lemail=$_POST['lemail'];
 	$lpass=$_POST['lpass'];
 	
-	$record=mysql_query("select userid,username,userpass,as_a from users where username='$lemail' and userpass='$lpass' ");
-	$name=mysql_fetch_array($record);
-	$count=mysql_num_rows($record);
+	$record=mysqli_query($conn, "select userid,username,userpass,as_a from users where username='$lemail' and userpass='$lpass' ");
+	$name=mysqli_fetch_array($record);
+	$count=mysqli_num_rows($record);
 	if($count==1)
 	{
 		$_SESSION['login']=$name['username']; 
@@ -109,11 +109,11 @@ $(document).ready(function(){
 	$remail=$_POST['remail'];
 	  $rpass1=$_POST['rpass1'];
 	  $as=$_POST['as'];
-  mysql_query("insert into users (username,userpass,as_a) values('$remail','$rpass1','$as')");
+  mysqli_query($conn, "insert into users (username,userpass,as_a) values('$remail','$rpass1','$as')");
 	
-	$record=mysql_query("select userid,username,userpass,as_a from users where username='$remail' and userpass='$rpass1' ");
-	$name=mysql_fetch_array($record);
-	$count=mysql_num_rows($record);
+	$record=mysqli_query($conn, "select userid,username,userpass,as_a from users where username='$remail' and userpass='$rpass1' ");
+	$name=mysqli_fetch_array($record);
+	$count=mysqli_num_rows($record);
 	if($count==1)
 	{
 		$_SESSION['login']=$name['username']; 

@@ -4,9 +4,9 @@ include('connection.php');
 ?>
 <html>
 <body>
-
-<h2><center>Assigned Testpapers</center></h2>
-
+<center>
+<h2>Assigned Testpapers</h2>
+</center>
 
 <div class="container">
 <div class="row">

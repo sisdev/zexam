@@ -10,15 +10,22 @@ require('connection.php');
   <body>
  
 <div class="container">
- <center>  <h1>Assign Test papers</h1> </center>
+<h1 style="padding:0px 0 10px 0; text-align:center; margin:0px;">Assign Test papers</h1>
 <div class="row">
 <div class="col-sm-5">
+
+
 <form method="post">
 
- <table class="table table-hover table-responsive">
+ <table class="table table-hover table-responsive" style="border:#d1cfcf solid 1px;">
     <thead>
-      <tr>
-<th>Sno</th><th>Paper</th><th>Subject</th><th>No. of questions</th><th>Duration</th><th>Total marks</th>
+<tr>
+	<th>Sno</th>
+	<th>Paper</th>
+	<th>Subject</th>
+	<th>No. of questions</th>
+	<th>Duration</th>
+	<th>Total marks</th>
 </tr>
     </thead>
     <tbody>
@@ -48,12 +55,13 @@ while($data=mysqli_fetch_array($test_paper))
     
  
  
-</div>
+</div><!--end-col-sm-5-->
+
 <div class="col-sm-1"></div>
 <div class="col-sm-4">
 
  
- <table class="table">
+ <table class="table table-responsive" style="border:#d1cfcf solid 1px;">
     <thead>
       <tr>
         <th>Students</th>
@@ -81,11 +89,12 @@ while($student=mysqli_fetch_array($std))
   <input class="form-control" required=required name="startdate" placeholder="Start Date"  id="datepick" type="text"></br>
   <input class="form-control" required=required name="enddate" placeholder="End Date"  id="datepick2" type="text"><p></br>
   <input type="submit" name="assignNow" class="btn btn-info btn-lg" value="Assign now">
-</div>
+</div><!--end-col-sm-4-->
 </form>
-</div>
 
-</div>
+</div><!--end-row-->
+
+</div><!--end-container-->
   <?php
   date_default_timezone_set('Asia/Kolkata');
   $assign_dtm= date("y-m-d H:i:sa");

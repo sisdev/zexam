@@ -3,7 +3,7 @@
 <style>
 .holder
 {
-	width:30%;
+
 	height:20%;
 	
 	margin:5% 5%;
@@ -17,15 +17,15 @@
 <?php
 include('connection.php');
 $getData=$_GET['data'];
-$sub=mysql_query("select subject_description from subject where subject_id='$getData'");
-$getSub=mysql_fetch_array($sub);
+$sub=mysqli_query($conn, "select subject_description from subject where subject_id='$getData'");
+$getSub=mysqli_fetch_array($sub);
 if(isset($_POST['subBttn']))
 {
 	//header("location:teacher-page.php?qry=subject_change");
-	mysql_query("update subject set subject_description='$_POST[subChange]' where subject_id='$getData'");
+	mysqli_query($conn, "update subject set subject_description='$_POST[subChange]' where subject_id='$getData'");
 	?>
 <script>
-window.location.href = "teacher-page.php?qry=subject_change";
+window.location.href = "teacher-page.php?qry=subject_manage";
 </script>
 <?php
 	

@@ -5,19 +5,19 @@ date_default_timezone_set('Asia/Kolkata');
 $getsessionid=$_REQUEST['sessionid'];
 echo "<input type=hidden value=$getsessionid id=pass_sess >";
 
- $id=mysql_query("select question_id from test_paper_questions where paper_id='".$_REQUEST['paperID']."' limit $_REQUEST[next],1");
+ $id=mysqli_query($conn, "select question_id from test_paper_questions where paper_id='".$_REQUEST['paperID']."' limit $_REQUEST[next],1");
 	
-	$paper_id=mysql_fetch_array($id);
+	$paper_id=mysqli_fetch_array($id);
 
-	$ques=mysql_query("select question_desc,question_id from question_master where question_id='".$paper_id['question_id']."'");
+	$ques=mysqli_query($conn,"select question_desc,question_id from question_master where question_id='".$paper_id['question_id']."'");
 
 	
-	$question=mysql_fetch_array($ques);
+	$question=mysqli_fetch_array($ques);
 	
-	$choices=mysql_query("select correct_choice from choice_master where question_id='".$question['question_id']."'");
+	$choices=mysqli_query($conn,"select correct_choice from choice_master where question_id='".$question['question_id']."'");
 	$choice_arr=array();
 	$count_arr=1;
-	while($answers=mysql_fetch_array($choices))
+	while($answers=mysqli_fetch_array($choices))
 	{
 		 $choice_arr[$count_arr]=$answers['correct_choice'];
 		 if($choice_arr[$count_arr]=="YES")
@@ -42,17 +42,17 @@ echo "<input type=hidden value=$getsessionid id=pass_sess >";
 		 <div class="list-group">
 		
 	<?php
-	$choice=mysql_query("select choice_desc,choice_id from choice_master where question_id='".$question['question_id']."' limit 0,4");
+	$choice=mysqli_query($conn, "select choice_desc,choice_id from choice_master where question_id='".$question['question_id']."' limit 0,4");
 	$ans=array();
 
-	while($ch=mysql_fetch_array($choice))
+	while($ch=mysqli_fetch_array($choice))
 	{
 	
-$ans[]= $ch['choice_desc'];  // make array of choices
+		$ans[]= $ch['choice_desc'];  // make array of choices
 	
 	}
-	$res=mysql_query("select ques,ans,status from test_result where ques='".($_REQUEST['next']+1)."' and sessionid='".$getsessionid."'");
-	$show=mysql_fetch_array($res);
+	$res=mysqli_query($conn, "select ques,ans,status from test_result where ques='".($_REQUEST['next']+1)."' and sessionid='".$getsessionid."'");
+	$show=mysqli_fetch_array($res);
 	
 		?>
 		<span class="list-group-item"><span  class="badge badges"><input <?php if($show['ans']==1) { ?> checked  <?php } ?> class="answer"  type="radio" name="options" value=1></span><?php echo $ans[0]; ?></span>
@@ -65,31 +65,31 @@ $ans[]= $ch['choice_desc'];  // make array of choices
 	if(isset($_REQUEST['Ques']))
 	{
 
-		mysql_query("update test_result set ans='".$_REQUEST['Ans']."', status='ok' where ques='".$_REQUEST['Ques']."' and sessionid='".$_REQUEST['Pass_sess']."'");
+		mysqli_query($conn, "update test_result set ans='".$_REQUEST['Ans']."', status='ok' where ques='".$_REQUEST['Ques']."' and sessionid='".$_REQUEST['Pass_sess']."'");
 		echo $choice_arr[$_REQUEST['Ans']];
 		if($_REQUEST['Correct_ch_id']==$_REQUEST['Ans'])
 		{
-			mysql_query("update test_result set correct_ans='correct' where ques='".$_REQUEST['Ques']."' and sessionid='".$_REQUEST['Pass_sess']."'");
+			mysqli_query($conn, "update test_result set correct_ans='correct' where ques='".$_REQUEST['Ques']."' and sessionid='".$_REQUEST['Pass_sess']."'");
 		}
 		else
 		{
-			mysql_query("update test_result set correct_ans='wrong' where ques='".$_REQUEST['Ques']."' and sessionid='".$_REQUEST['Pass_sess']."'");
+			mysqli_query($conn, "update test_result set correct_ans='wrong' where ques='".$_REQUEST['Ques']."' and sessionid='".$_REQUEST['Pass_sess']."'");
 		}
 			
 	}
 	
 	if(isset($_REQUEST['Ans_rew']))
 	{
-		mysql_query("update test_result set status='review' where ques='".$_REQUEST['Ans_rew']."' and sessionid='".$_REQUEST['Sess_id_pass']."'");
+		mysqli_query($conn,"update test_result set status='review' where ques='".$_REQUEST['Ans_rew']."' and sessionid='".$_REQUEST['Sess_id_pass']."'");
 	}
 	if(isset($_REQUEST['clear_val']))
 	{
-		mysql_query("update test_result set status='no answer',ans='0',correct_ans='' where ques='".$_REQUEST['clear_val']."' and sessionid='".$_REQUEST['Sess_id_pass']."'");
+		mysqli_query($conn, "update test_result set status='no answer',ans='0',correct_ans='' where ques='".$_REQUEST['clear_val']."' and sessionid='".$_REQUEST['Sess_id_pass']."'");
 	}
 	
 	if(isset($_REQUEST['Sessionid_onsubmit']))
 	{
-		mysql_query("update test_taken set test_end_dtm='".date('Y-m-d h:i:sa')."' where session_id='".$_REQUEST['Sessionid_onsubmit']."'");
+		mysqli_query($conn, "update test_taken set test_end_dtm='".date('Y-m-d h:i:sa')."' where session_id='".$_REQUEST['Sessionid_onsubmit']."'");
 	}
 	
 	

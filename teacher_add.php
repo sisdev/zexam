@@ -1,14 +1,14 @@
 <?php
 require('connection.php');
 
+
+
 if(isset($_POST['addnow']))
 {
 	 $email=$_POST['emailid'];
-	 $subject=$_POST['subject'];
-	 $inst=$_POST['institute'];
 	 $pwd=$_POST['password'];
 	 $role="teacher";
-	 $query=mysql_query("insert into users (username,institute,subject,userpass,role) values ('$email','$inst','$subject','$pwd','$role') ");
+	 $query=mysqli_query($user_conn, "insert into users (username,userpass,exam_role) values ('$email','$pwd','$role') ");
 	 
 	 if($query==1)
 	 {
@@ -38,31 +38,6 @@ alert("Teacher added successfully");
 
   <div class="col-md-10">
   <input id="emailid" name="emailid" placeholder="Email ID" class="form-control input-md" required="" type="email">
-    
-  </div>
-</div>
-
-<!-- Select Basic -->
-<div class="form-group">
- 
-  <div class="col-md-10">
-    <select id="selectbasic" name="subject" class="form-control">
-	<option>Select Subject</option>
-	<?php $sub=mysql_query("select subject_id, subject_description from subject"); 
-	while($subject=mysql_fetch_array($sub))
-	{
-	?>
-      <option value=<?php echo $subject['subject_id']; ?>><?php echo $subject['subject_description']; ?></option>
-	<?php } ?>
-    </select>
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-
-  <div class="col-md-10">
-  <input id="institute" name="institute" placeholder="Institute" class="form-control input-md" required="" type="text">
     
   </div>
 </div>

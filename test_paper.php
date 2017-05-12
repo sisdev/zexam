@@ -1,3 +1,9 @@
+<?php
+error_reporting(1);
+session_start();
+include("connection.php");
+
+?>
 <html>
 <head><title>Test paper</title>
 <script src="jquery-2.2.0.min.js"></script>
@@ -68,10 +74,6 @@ var xmlhttp = new XMLHttpRequest();
 
 
 <form method="post" > <!-- onsubmit="return process()"  -->
-<?php
-error_reporting(1);
-
-?>
 <div class="main">
 <h2 style="text-align:center; padding:0px 0 20px 0; margin:0px;">CREATE TEST PAPER</h2>
 <div class="form">
@@ -177,7 +179,7 @@ error_reporting(1);
 	$get_marks=$_POST['marks'];
 	$address=$_SERVER['REMOTE_ADDR'];
 $get_dtm=(string)date("Y-m-d H:i:s");
-$createdby="jasbir singh";
+$createdby=$_SESSION["login"];
 	$get_subjectID=$_POST['subjectID'];
 	
 	mysqli_query($conn, "insert into test_paper (paper_desc,subject_id,no_of_questions,duration,total_marks,created_dtm,created_ip,created_by) values

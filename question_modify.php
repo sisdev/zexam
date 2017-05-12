@@ -8,17 +8,17 @@
 ob_start();
 error_reporting(1);
 include("connection.php");
-$question=mysql_query("select question_desc, subject_id, topic_id  from question_master where question_id='$_GET[res]'");
-$fetch=mysql_fetch_array($question);
+$question=mysqli_query($conn, "select question_desc, subject_id, topic_id  from question_master where question_id='$_GET[res]'");
+$fetch=mysqli_fetch_array( $question);
 
-$options=mysql_query("select choice_id,choice_desc ,correct_choice from choice_master where question_id='$_GET[res]' order by choice_id ");
+$options=mysqli_query($conn,"select choice_id,choice_desc ,correct_choice from choice_master where question_id='$_GET[res]' order by choice_id ");
 
 $get_options=array();
 $ary_choice_id = array() ;
 $ary_correct_choice = array() ;
 
 $i=0;
-while($get_opn=mysql_fetch_array($options))
+while($get_opn=mysqli_fetch_array($options))
 {
 $get_options[$i]=$get_opn['choice_desc'];
 $ary_choide_id[$i]=$get_opn['choice_id'];
@@ -34,28 +34,28 @@ if(isset($_POST['update']))
 $topic=$_POST['topicID'];
 //$subject=$_POST['subjectID'];
 $question_change=$_POST['change_ques'];
-mysql_query("update question_master set question_desc='$question_change', topic_id='$topic' where question_id='$_GET[res]' ");
+mysqli_query($conn, "update question_master set question_desc='$question_change', topic_id='$topic' where question_id='$_GET[res]' ");
 //mysql_query("update question_master set subject_id=$subject where question_id='$_GET[res]' ");
 //mysql_query("update question_master set question_desc='$_POST[change_ques]' where question_id='$_GET[res]'");
 if($correct_choice==1)
-mysql_query("update choice_master set choice_desc='$_POST[option_one]',correct_choice='YES' where choice_id='$ary_choide_id[0]'");
+mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_one]',correct_choice='YES' where choice_id='$ary_choide_id[0]'");
 else
-mysql_query("update choice_master set choice_desc='$_POST[option_one]',correct_choice='NO' where choice_id='$ary_choide_id[0]'");
+mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_one]',correct_choice='NO' where choice_id='$ary_choide_id[0]'");
 
 if($correct_choice==2)
-mysql_query("update choice_master set choice_desc='$_POST[option_two]',correct_choice='YES' where choice_id='$ary_choide_id[1]'");
+mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_two]',correct_choice='YES' where choice_id='$ary_choide_id[1]'");
 else
-mysql_query("update choice_master set choice_desc='$_POST[option_two]',correct_choice='NO' where choice_id='$ary_choide_id[1]'");
+mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_two]',correct_choice='NO' where choice_id='$ary_choide_id[1]'");
 
 if($correct_choice==3)
-mysql_query("update choice_master set choice_desc='$_POST[option_three]',correct_choice='YES' where choice_id='$ary_choide_id[2]'");
+mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_three]',correct_choice='YES' where choice_id='$ary_choide_id[2]'");
 else
-mysql_query("update choice_master set choice_desc='$_POST[option_three]',correct_choice='NO' where choice_id='$ary_choide_id[2]'");
+mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_three]',correct_choice='NO' where choice_id='$ary_choide_id[2]'");
 
 if($correct_choice==4)
-mysql_query("update choice_master set choice_desc='$_POST[option_four]',correct_choice='YES' where choice_id='$ary_choide_id[3]'");
+mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_four]',correct_choice='YES' where choice_id='$ary_choide_id[3]'");
 else
-mysql_query("update choice_master set choice_desc='$_POST[option_four]',correct_choice='NO' where choice_id='$ary_choide_id[3]'");
+mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_four]',correct_choice='NO' where choice_id='$ary_choide_id[3]'");
 
 
 
@@ -112,9 +112,9 @@ $(document).ready(function(){
    <!--   <select name="subjectID" id="aa">
 	  <option value="select">Select...</option>  -->
 	<?php 
-	$arr=mysql_query("select subject_id,subject_description from subject");
+	$arr=mysqli_query($conn, "select subject_id,subject_description from subject");
 	
-	while($row=mysql_fetch_array($arr))
+	while($row=mysqli_fetch_array($arr))
 	{
 		if ($row["subject_id"] == $fetch["subject_id"])
 		{
@@ -144,8 +144,8 @@ $(document).ready(function(){
       <select name="topicID">
 	  <option value="select">select...</option>
          <?php 
-			$arr=mysql_query("select topic_id,subject_id,topic_description from topic where subject_id='$fetch[subject_id]'");
-			while($row=mysql_fetch_array($arr))
+			$arr=mysqli_query($conn, "select topic_id,subject_id,topic_description from topic where subject_id='$fetch[subject_id]'");
+			while($row=mysqli_fetch_array($arr))
 			{
 			if($row['topic_id']==$fetch['topic_id'] )
 			{

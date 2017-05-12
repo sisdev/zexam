@@ -60,7 +60,7 @@ var xmlhttp = new XMLHttpRequest();
 <center><h1>LIST OF TEST PAPERS</h1></center>
 <?php
 $test_paper_list = "select T.paper_id,T.paper_desc,T.subject_id,T.no_of_questions,T.duration,T.total_marks,S.subject_description from test_paper T,subject S
-where S.subject_id=T.Subject_id and T.created_by = '$user_name'" ;
+where S.subject_id=T.Subject_id and T.access_type = 'public'" ;
 
 echo $test_paper_list."<BR>" ;
 
@@ -69,7 +69,7 @@ $test_paper=mysqli_query($conn,$test_paper_list);
 $test_paper_count=mysqli_num_rows($test_paper) ;
 
 if ($test_paper_count == 0) {
-	echo "No test paper published by you" ;
+	echo "No test paper available for you" ;
 	
 	exit(1) ;
 }
@@ -78,18 +78,6 @@ echo "Total Testpapers:". $test_paper_count ;
 
 ?>
 <form method=post>
-Select Test Paper:-<select name="subjectID" id="myid" onChange="Retrive(this.value)">
-	  <option value="select">select...</option>
-	  <option value="ALL">ALL</option>
-	<?php
-	$arr=mysqli_query($conn,"select subject_id,subject_description from subject");
-	while($row=mysqli_fetch_array($arr))
-	{
-	echo "<option value=".$row["subject_id"].">".$row["subject_description"]."</option>";
-	}
-	?>
-      
-     </select><p><p>
 <div id="seldata">
 <table>
 <tr>
@@ -107,10 +95,7 @@ while($data=mysqli_fetch_array($test_paper))
 <td width=100><?php echo $data["no_of_questions"]; ?></td>
 <td width=100><?php echo $data["duration"]; ?></td>
 <td width=100><?php echo $data["total_marks"]; ?></td> 
-  <?php if($res['role']=="admin") {  $_SESSION['isadmin']="yes"; ?>
-<td><a href='teacher-page.php?mod=<?php echo $data[paper_id]; ?>&qry=test_paper_view'>generate xml</a></td><td width=100></td>
-  <?php } ?>
-<td><a href='teacher-page.php?qry=test_paper_del'  onClick='deleteme(<?php echo $data['paper_id']; ?> )'>Delete </a></td><td width=50px></td><td><a href='teacher-page.php?mod=<?php echo $data[paper_id]; ?>&qry=test_paper_modify'>Modify</a></td></tr>
+<td width=50px></td><td><a href='teacher-page.php?mod=<?php echo $data[paper_id]; ?>&qry=test_paper_assign_self'>Test Paper Assign</a></td></tr>
 
 <?php 
 $count++;

@@ -9,8 +9,8 @@ if(isset($_POST['login']))
 if(isset($_POST['remember']))
 {
 	$cookie_name = "user";
-$cookie_value = $email;
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+	$cookie_value = $email;
+	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 }
 	$user_query="select id,username,userpass,exam_role from users where username='$email' and userpass='$pass' ";
 	echo $user_query;

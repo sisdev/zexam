@@ -5,7 +5,7 @@ if(isset($_POST['changeBttn']))
 {
 		//header("location:teacher-page.php?qry=topic_manage");
 	$topDesc=$_POST['changeTopic'];
-	mysql_query("update topic set topic_description='$topDesc' where topic_id='$getTopic_id'");
+	mysqli_query($conn, "update topic set topic_description='$topDesc' where topic_id='$getTopic_id'");
 
 	?>
 <script>
@@ -33,8 +33,8 @@ window.location.href = "teacher-page.php?qry=topic_manage";
 <form method="post">
 <?php
 
-$getT=mysql_query("select topic_description from topic where topic_id='$getTopic_id'");
-$top=mysql_fetch_array($getT);
+$getT=mysqli_query($conn, "select topic_description from topic where topic_id='$getTopic_id'");
+$top=mysqli_fetch_array($getT);
 ?>
 Edit Topic<input type="text" name="changeTopic" value='<?php echo $top['topic_description']; ?>'><input type="submit" name="changeBttn" value="Change Topic">
 </form>

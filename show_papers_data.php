@@ -16,15 +16,15 @@ error_reporting(1);
 $get_subID=$_REQUEST["q"];
 if($get_subID=="ALL")
 {
-$test_paper=mysql_query("select T.paper_id,T.paper_desc,T.subject_id,T.no_of_questions,T.duration,T.total_marks,S.subject_description from test_paper T,subject S
+$test_paper=mysqli_query($conn, "select T.paper_id,T.paper_desc,T.subject_id,T.no_of_questions,T.duration,T.total_marks,S.subject_description from test_paper T,subject S
 where S.subject_id=T.Subject_id");
 }
 else
 {
-$test_paper=mysql_query("select T.paper_id,T.paper_desc,T.subject_id,T.no_of_questions,T.duration,T.total_marks,S.subject_description from test_paper T,subject S
+$test_paper=mysqli_query($conn, "select T.paper_id,T.paper_desc,T.subject_id,T.no_of_questions,T.duration,T.total_marks,S.subject_description from test_paper T,subject S
 where S.subject_id=T.Subject_id and T.subject_id=$get_subID");
 }
-while($data=mysql_fetch_array($test_paper))
+while($data=mysqli_fetch_array($test_paper))
 {
 ?>
 <tr><td ><?php echo $count; ?></td>

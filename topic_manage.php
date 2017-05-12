@@ -50,9 +50,9 @@ Subject: <select id="topic_by_subject">
 <option value="11">All Subject</option>
 <?php
 
-$sel=mysql_query("select subject_id,subject_description from subject");
+$sel=mysqli_query($conn, "select subject_id,subject_description from subject");
 
-while($rec=mysql_fetch_array($sel))
+while($rec=mysqli_fetch_array($sel))
 {
 	echo "<option value=".$rec['subject_id'].">".$rec['subject_description']."</option>";
 	
@@ -65,10 +65,10 @@ while($rec=mysql_fetch_array($sel))
 <?php
 
 error_reporting(1);
-$topic=mysql_query("select T.topic_description,S.subject_description,topic_id from topic T,subject S where T.subject_id=S.subject_id");
+$topic=mysqli_query($conn, "select T.topic_description,S.subject_description,topic_id from topic T,subject S where T.subject_id=S.subject_id");
 echo "<table>";
 $count=1;
-while($getTopic=mysql_fetch_array($topic))
+while($getTopic=mysqli_fetch_array($topic))
 {
 echo "<tr><td>$count</td><td width=20px></td><td>$getTopic[topic_description]</td><td width=20px></td><td>$getTopic[subject_description]</td></td><td width=50px></td>
 <td><a href='teacher-page.php?data=$getTopic[topic_id]&qry=topic_modify'>Modify</a></td><td width=50px></td><td><a href='teacher-page.php?delData=$getTopic[topic_id]&qry=topic_del' onclick='return delbox()'>Delete</a></td></td>
@@ -80,7 +80,7 @@ $delTop=$_GET['delData'];
 if(isset($delTop))
 {
 	
-	mysql_query("delete from topic where topic_id='$delTop'");
+	mysqli_query($conn, "delete from topic where topic_id='$delTop'");
 }
 ?>
 </div>
@@ -90,8 +90,8 @@ if(isset($delTop))
 <form method="post">
 Add a new Topic<input type="text" name="addTopic" required=required>
 <select name="addSubject"><?php 
-$sub=mysql_query("select subject_description,subject_id from subject");
-while($getSub=mysql_fetch_array($sub)){
+$sub=mysqli_query($conn, "select subject_description,subject_id from subject");
+while($getSub=mysqli_fetch_array($sub)){
 echo "<option value=$getSub[subject_id]>$getSub[subject_description]</option>";
 }
 ?>
@@ -102,7 +102,7 @@ if(isset($_POST['topicBttn']))
 {
  $getTop=$_POST['addTopic'];
  $getSub_id=$_POST['addSubject'];
-mysql_query("insert into topic (topic_description,subject_id) values('$getTop','$getSub_id')");	
+mysqli_query($conn, "insert into topic (topic_description,subject_id) values('$getTop','$getSub_id')");	
 }
 ?>
 </form>

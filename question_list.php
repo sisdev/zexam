@@ -1,5 +1,5 @@
 <?php
-if(!isset($_SESSION['email']))
+ if(!isset($_SESSION['email']))
 {
 	header("location:index.php");
 }
@@ -7,8 +7,7 @@ else
 {
 	$user_name=$_SESSION['email'] ;
 }
-
-?>
+ ?>
 
 <html>
 <head></head>
@@ -30,9 +29,26 @@ function subchange(itsval)
 </script>
 <body>
 <h2 style="text-align:center; padding:0px 0 15px 0; margin:0px; text-decoration:underline;">LIST OF QUESTIONS</h2>
-Subject:- <select id="bysub" onChange="subchange(this.value)" style="margin-bottom:15px;">
 <?php  
 
+$ques_list = "select * from question_master where created_by = '$user_name'" ;
+
+echo $ques_list."<BR>" ;
+
+$sel=mysqli_query($conn, $ques_list);
+
+$ques_count = mysqli_num_rows($sel) ;
+
+if ($ques_count == 0)
+{
+	echo " No questions submitted by you" ;
+	exit(1) ;
+}
+echo " Total Questions Submitted: ". $ques_count ;	
+?>	
+
+Subject:- <select id="bysub" onChange="subchange(this.value)" style="margin-bottom:15px;">
+<?php
 $sub=mysqli_query($conn, "select subject_description,subject_id from subject where subject_id in (select distinct subject_id from question_master where created_by = '$user_name')");
 while($getSub=mysqli_fetch_array($sub))
 {
@@ -45,11 +61,6 @@ while($getSub=mysqli_fetch_array($sub))
 
 <?php
 
-$ques_list = "select * from question_master where created_by = '$user_name'" ;
-
-echo $ques_list ;
-
-$sel=mysqli_query($conn, $ques_list);
 
 $count_sno=1;
 echo "<table border=1>" ;

@@ -9,7 +9,7 @@ if(isset($_POST['addnowstd']))
 	 $ins_std=$_POST['inst_std'];
 	 $reg_no=$_POST['regno_std'];
 	 $role="student";
-	 $query=mysql_query("insert into users (username,userpass,institute,reg_no,role) values ('$email','$pwd','$ins_std','$reg_no','$role') ");
+	 $query=mysqli_query($user_conn, "insert into users (username,userpass, exam_role) values ('$email','$pwd','$role') ");
 	 
 	 if($query==1)
 	 {

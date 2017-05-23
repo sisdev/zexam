@@ -1,7 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" language="JavaScript">
 
+        function checkCheckBoxes(theForm) {
+
+            var test = document.getElementsByName("ans");
+			var chk_count = 0 ;
+			var select_index = document.getElementById("selectTopic").value;
+			//alert("Index no: "+select_index);
+			
+			if(select_index==0){
+				alert("Please select the topic.");
+				return false;
+			}
+			
+			if(test[0].checked==true)
+            {
+                chk_count++ ;
+            }
+
+			if(test[1].checked==true)
+            {
+                chk_count++ ;
+            }
+
+			if(test[2].checked==true)
+            {
+                chk_count++ ;
+            }
+			if(test[3].checked==true)
+            {
+                chk_count++ ;
+            }
+			//alert("Check Box Counts:"+chk_count);
+			
+			if (chk_count==0){
+			    alert("Please Check atleast one check box");
+				return false ;
+			}
+			else if (chk_count ==1){
+				alert("Data modified successfully.");
+				return true ;
+			}
+			else if (chk_count>1){
+			    alert("Please Check Only one check box");
+				return false ;
+			}
+        }
+
+    </script>
 </head>
 <body><center><h1><U>MODIFY QUESTION</U></h1></center>
 <?php
@@ -30,7 +78,7 @@ $correct_choice = $_POST['ans'] ;
 
 if(isset($_POST['update']))
 {
-	header("location:teacher-page.php?qry=list_ques");
+	
 $topic=$_POST['topicID'];
 //$subject=$_POST['subjectID'];
 $question_change=$_POST['change_ques'];
@@ -56,17 +104,15 @@ if($correct_choice==4)
 mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_four]',correct_choice='YES' where choice_id='$ary_choide_id[3]'");
 else
 mysqli_query($conn, "update choice_master set choice_desc='$_POST[option_four]',correct_choice='NO' where choice_id='$ary_choide_id[3]'");
-
-
-
-
-
-
+?>
+<script>
+	window.location.href = "teacher-page.php?qry=list_ques";
+</script>
+<?php
 }
 
-
 ?>
-<script src="jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){
 
@@ -75,40 +121,34 @@ $(document).ready(function(){
 	$(".check").change(function(){
 		
 		if($(".check:checked"))
-	{
-		inc++;
-		if(inc > 1)
 		{
-			alert("can not select multiple options");
-			inc=0;
-			 $('.check').attr('checked', false);
+			inc++;
+			if(inc > 1)
+			{
+				alert("can not select multiple options");
+				inc=0;
+				 $('.check').attr('checked', false);
+			}
 		}
-	
-	}
-	
-		
 	});
-	
-	
-	
 });
 
 </script>
 
 
 <div id="result"></div>
-<form method="post" name="myform" >
+<form method="post" name="myform" onsubmit="return checkCheckBoxes(this);">
 
-<table width="965" border="0">
+<table border="0">
   <tr>
-    <td colspan="2"><form name="form1" method="post" action="">
+    <td colspan="2"><form name="form1" method="post" >
         <label></label>
     </td>
     <td width="37">&nbsp;</td>
   </tr>
   <tr>
-    <td width="215"><label></label></td>
-    <td width="631">Subject:
+    <td width="215"></td>
+    <td width="631"><label style="margin-bottom:2%">Subject :</label>
    <!--   <select name="subjectID" id="aa">
 	  <option value="select">Select...</option>  -->
 	<?php 
@@ -130,19 +170,11 @@ $(document).ready(function(){
 
 	
 	?>
-      
-     </select>
-	 
-	
-	  
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	  
-	 
-	
-	  
-	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Topic:
-      <select name="topicID">
-	  <option value="select">select...</option>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <label>Topic :</label>
+      <select id="selectTopic" name="topicID">
+	  <option value="0">Select topic </option>
          <?php 
 			$arr=mysqli_query($conn, "select topic_id,subject_id,topic_description from topic where subject_id='$fetch[subject_id]'");
 			while($row=mysqli_fetch_array($arr))
@@ -157,8 +189,6 @@ $(document).ready(function(){
 			}
 				
 			}
-
-	
 	?>
 		</select>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -178,7 +208,7 @@ $(document).ready(function(){
     <td>
 	<?php
 	if($ary_correct_choice[0]=='YES')
-	echo "<input type='checkbox' name='ans' class='check' checked=checked value='1'>";
+	echo "<input type='checkbox' name='ans' class='check' checked='checked' value='1'>";
 	else
 	echo "<input type='checkbox' name='ans' class='check' value='1'>";
 	?>
@@ -191,7 +221,7 @@ $(document).ready(function(){
 	
 	<?php
 	if($ary_correct_choice[1]=='YES')
-	echo "<input type='checkbox' name='ans' class='check' checked=checked value='2'>";
+	echo "<input type='checkbox' name='ans' class='check' checked='checked' value='2'>";
 	else
 	echo "<input type='checkbox' name='ans' class='check' value='2'>";
 	?>
@@ -204,7 +234,7 @@ $(document).ready(function(){
     <td>
 	<?php
 	if($ary_correct_choice[2]=='YES')
-	echo "<input type='checkbox' name='ans' class='check' checked=checked value='3'>";
+	echo "<input type='checkbox' name='ans' class='check' checked='checked' value='3'>";
 	else
 	echo "<input type='checkbox' name='ans' class='check' value='3'>";
 	?>
@@ -217,7 +247,7 @@ $(document).ready(function(){
     <td>
 	<?php
 	if($ary_correct_choice[3]=='YES')
-	echo "<input type='checkbox' name='ans' class='check' checked=checked value='4'>";
+	echo "<input type='checkbox' name='ans' class='check' checked='checked' value='4'>";
 	else
 	echo "<input type='checkbox' name='ans' class='check' value='4'>";
 	?>
@@ -226,7 +256,8 @@ $(document).ready(function(){
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td><input type="submit" name="update" value="UPDATE" >
+    <td><input type="submit" name="update" value="UPDATE"  >
+	
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     <td>&nbsp;</td>

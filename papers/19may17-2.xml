@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Questionare duration="5" course="M.S. Office">
+  <Question number="1">
+    <QStr>In which menu Spelling command appears</QStr>
+    <topic>Word</topic>
+    <Item>Tool</Item>
+    <Item>Windows</Item>
+    <Item>Edit</Item>
+    <Item>None of the above</Item>
+    <Answer>1</Answer>
+  </Question>
+  <Question number="2">
+    <QStr>A right click on the Windows desktop itself will _____.</QStr>
+    <topic>Other</topic>
+    <Item>Open the Display Properties dialog box</Item>
+    <Item>Show a context-sensitive menu</Item>
+    <Item>Open the Control Panel</Item>
+    <Item>Minimize all open applications</Item>
+    <Answer>2</Answer>
+  </Question>
+  <Question number="3">
+    <QStr>"When numbers are typed inside a cell, the default alignment is:"</QStr>
+    <topic>Excel</topic>
+    <Item>Left-aligned</Item>
+    <Item>Centre-aligned</Item>
+    <Item>Right-aligned</Item>
+    <Item>Justified</Item>
+    <Answer>3</Answer>
+  </Question>
+  <Question number="4">
+    <QStr>Cell address A$4 in a formula means it is a</QStr>
+    <topic>Excel</topic>
+    <Item>Relative cell reference</Item>
+    <Item>Absolute cell reference</Item>
+    <Item>Mixed cell reference</Item>
+    <Item>All of the above</Item>
+    <Answer>3</Answer>
+  </Question>
+  <Question number="5">
+    <QStr>When you create a chart on a separate sheet in the same workbook it is called a……….</QStr>
+    <topic>Excel</topic>
+    <Item>Chart sheet</Item>
+    <Item>Embedded chart</Item>
+    <Item>View sheet</Item>
+    <Item>View sheet</Item>
+    <Answer>1</Answer>
+  </Question>
+</Questionare>

@@ -1,12 +1,12 @@
 <?php 
 include('connection.php');
-if(!isset($_SESSION['email']))
+if(!isset($_SESSION['login']))
 {
 	header("location:index.php");
 }
 else
 {
-	$user_name=$_SESSION['email'] ;
+	$user_name=$_SESSION['login'] ;
 }
 
 ?>
@@ -14,11 +14,121 @@ else
 <html>
 
 <head>
+
+<script type="text/javascript" language="JavaScript">
+
+        function checkCheckBoxes(theForm) {
+
+            var test = document.getElementsByName("ans");
+			var chk_count = 0 ;
+			var select_index = document.getElementById("selectTopic").value;
+			//alert("Index no: "+select_index);
+			
+			if(select_index==0){
+				alert("Please select the topic.");
+				return false;
+			}
+			
+			if(test[0].checked==true)
+            {
+                chk_count++ ;
+            }
+
+			if(test[1].checked==true)
+            {
+                chk_count++ ;
+            }
+
+			if(test[2].checked==true)
+            {
+                chk_count++ ;
+            }
+			if(test[3].checked==true)
+            {
+                chk_count++ ;
+            }
+			//alert("Check Box Counts:"+chk_count);
+			
+			if (chk_count==0){
+			    alert("Please check atleast one check box for correct answer.");
+				return false ;
+			}
+			else if (chk_count ==1){
+				alert("Question added successfully.");
+				return true ;
+			}
+			else if (chk_count>1){
+			    alert("Please check only one check box.");
+				return false ;
+			}
+			
+			
+			
+        }
+
+    </script>
 <script>
+/*$(document).ready(function(){
 
-function ShowTopic(str) {
+		
+	var inc=0;
+	$(".check").change(function(){
+	var check_status = $(this).checked ;
+	alert("Check status:"+ check_status) ;	
+		if($(".check").checked=="true")
+	{
+		inc++;
+	}
+	else
+	{
+		inc-- ;
+	}
+	if(inc==2)
+		{
+			alert("can not select multiple options");
+			///$(this).prop('checked', false);
+			
+		}		
+	}) ;
 
-      
+
+	$( "#quesform" ).submit(function( event ) {
+	alert( "Handler for .submit() called."+inc );
+//	return false ;
+	//event.preventDefault();
+	});
+		
+		
+	
+		
+	});
+	
+
+
+function validateForm(){
+/*
+var t1 = prompt("Enter data");
+alert("Number of checkboxed checked:") ;
+
+alert(inc) ;
+return false ;
+*/
+/*	if(inc > 1)
+		{
+			alert("can not select multiple options");
+			inc=0;
+			 $('.check').attr('checked', false);
+		}
+	
+	
+}
+
+*/
+
+
+
+
+function ShowTopic(str) {     
 	  var xmlhttp = new XMLHttpRequest();
 		xmlhttp.open("POST", "getTopic.php?q=" + str);
         xmlhttp.send();
@@ -35,10 +145,12 @@ function ShowTopic(str) {
        
     }
 
+	
+	
 
 </script>
 </head>
-<body onLoad="ShowTopic(1)">
+<body onLoad="ShowTopic(10)">
 
 <h2 style="text-align:center; padding:0px 0 15px 0; margin:0px;">ADD QUESTION</h2>
 <?php
@@ -49,7 +161,7 @@ $getTopic=$_POST['topicID'];
 $getSub=$_POST['subjectID'];
 $address=$_SERVER['REMOTE_ADDR'];
 $get_dtm=(string)date("Y-m-d H:i:s");
-$createdby="jasbir singh";
+$createdby=$user_name ;
 $correct_choice = $_POST['ans'] ;
 mysqli_query($conn,"insert into question_master(question_desc,topic_id,subject_id,created_dtm,created_ip,created_by) 
 values('$getQues','$getTopic','$getSub', '$get_dtm','$address','$createdby')") or die(mysql_error());
@@ -66,7 +178,7 @@ if($answer3=="")
 $answer4=$_POST['answer4'];
 if($answer4=="")
 	$answer4=" ";
-$last_val=(string)mysqli_insert_id() ; // getting last ID from autoincrement
+$last_val= mysqli_insert_id($conn) ; // getting last ID from autoincrement
 
 //$ques_id=mysql_query("select question_id from question_master where question_desc='$_POST[question]'");	$row=mysql_fetch_array($ques_id);
 if ($correct_choice == 1)
@@ -104,10 +216,11 @@ mysqli_query($conn, "insert into choice_master (choice_desc,correct_choice,quest
 }
 ?>
 <div id="result"></div>
-<form method="post" name="myform">
+
+<form name="form1" method="post" onsubmit="return checkCheckBoxes(this)">
 <table border="0">
   <tr>
-    <td colspan="2"><form name="form1" method="post" action="">
+    <td colspan="2">
         <label></label>
     </td>
     <td width="37">&nbsp;</td>
@@ -130,40 +243,16 @@ mysqli_query($conn, "insert into choice_master (choice_desc,correct_choice,quest
      </select>
 	 
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Topic: 
-	  <a id="selTopic">
+	  <span id="selTopic">
 	  
-	   <select>
-		   <option>select...</option>
+	   <select id="selectTopic">
+		   <option value="0">Select Topic</option>
 	   </select>	  
-	  </div>
+	  </span >
 	  
 
    
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-<script>
-$(document).ready(function(){
-	var inc=0;
-	$(".check").change(function(){
-		
-	if($(".check:checked"))
-	{
-		inc++;
-		if(inc==2)
-		{
-			alert("can not select multiple options");
-			inc=0;
-			 $('.check').attr('checked', false);
-		}
-	}
-		
-		
-		
-	});
-	
-});
-
-</script>
 
     </td>
 	
@@ -172,30 +261,30 @@ $(document).ready(function(){
   
   <tr>
     <td>Question: &nbsp;&nbsp;</td>
-    <td><textarea name="question" placeholder="Enter question" rows="5"  cols="100" required="required" style="margin-top:15px;"></textarea>&nbsp;</td>
+    <td><textarea name="question" placeholder="Enter question" rows="5"  cols="100" required style="margin-top:15px;"></textarea>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td>Answer 1: </td>
-    <td><textarea name="answer1" cols="100"></textarea>&nbsp;</td>
+    <td><textarea name="answer1" required cols="100" ></textarea>&nbsp;</td>
     <td>&nbsp;<input type="checkbox" class="check" name="ans"  value="1"></td>
   </tr>
   
   <tr>
     <td>Answer 2: </td>
-    <td><textarea name="answer2" cols="100"></textarea>&nbsp;</td>
+    <td><textarea name="answer2" required cols="100"></textarea>&nbsp;</td>
     <td>&nbsp;<input type="checkbox" class="check" name="ans" value="2"></td>
   </tr>
   
   <tr>
     <td>Answer 3: </td>
-    <td><textarea name="answer3" cols="100"></textarea>&nbsp;</td>
+    <td><textarea name="answer3" required cols="100"></textarea>&nbsp;</td>
     <td>&nbsp;<input type="checkbox" class="check" name="ans" value="3"></td>
   </tr>
   
   <tr>
     <td>Answer 4: </td>
-    <td><textarea name="answer4" cols="100"></textarea>&nbsp;</td>
+    <td><textarea name="answer4" required cols="100"></textarea>&nbsp;</td>
     <td>&nbsp;<input type="checkbox" class="check" name="ans" value="4"></td>
   </tr>
   

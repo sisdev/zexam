@@ -1,6 +1,6 @@
 
-      <select name="topicID">
-	  <option value="select">select...</option>
+      <select id="selectTopic" name="topicID">
+	  <option value="0">Select Topic</option>
          <?php 
 		 include("connection.php");
          $getData=$_REQUEST['q']; 

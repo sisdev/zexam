@@ -55,6 +55,10 @@ var xmlhttp = new XMLHttpRequest();
         }
 }
 </script>
+
+<style>
+	table td ,th{padding:10px 0;}
+</style>
 </head>
 <body>
 <center><h1>LIST OF TEST PAPERS</h1></center>
@@ -79,9 +83,15 @@ echo "Total Testpapers:". $test_paper_count ;
 ?>
 <form method=post>
 <div id="seldata">
-<table>
+<table border="1" style="margin-top:15px; margin-bottom:25px;">
 <tr>
-<th>Sno</th><th>Paper</th><th>Subject</th><th>No. of questions</th><th>Duration</th><th>Total marks</th>
+	<th>&nbsp; Sno &nbsp;</th>
+	<th>&nbsp; Paper &nbsp;</th>
+	<th>&nbsp; Subject &nbsp;</th>
+	<th>&nbsp; No. of questions &nbsp;</th>
+	<th>&nbsp; Duration &nbsp;</th>
+	<th>&nbsp; Total marks &nbsp;</th>
+	<th>&nbsp; Action &nbsp;</th>
 </tr>
 <?php 
 $count=1;
@@ -89,13 +99,15 @@ $count=1;
 while($data=mysqli_fetch_array($test_paper))
 {
 ?>
-<tr><td ><?php echo $count; ?></td>
-<td width=100><?php echo $data["paper_desc"]; ?></td>
-<td width=100><?php echo $data["subject_description"]; ?></td>
-<td width=100><?php echo $data["no_of_questions"]; ?></td>
-<td width=100><?php echo $data["duration"]; ?></td>
-<td width=100><?php echo $data["total_marks"]; ?></td> 
-<td width=50px></td><td><a href='teacher-page.php?mod=<?php echo $data[paper_id]; ?>&qry=test_paper_assign_self'>Test Paper Assign</a></td></tr>
+<tr>
+	<td >&nbsp; <?php echo $count; ?> &nbsp;</td>
+	<td>&nbsp; <?php echo $data["paper_desc"]; ?> &nbsp;</td>
+	<td>&nbsp; <?php echo $data["subject_description"]; ?> &nbsp;</td>
+	<td>&nbsp; <?php echo $data["no_of_questions"]; ?> &nbsp;</td>
+	<td>&nbsp; <?php echo $data["duration"]; ?> &nbsp;</td>
+	<td>&nbsp; <?php echo $data["total_marks"]; ?> &nbsp;</td> 
+	<td>&nbsp; <a href='teacher-page.php?mod=<?php echo $data[paper_id]; ?>&qry=test_paper_assign_self'>Test Paper Assign</a> &nbsp;</td>
+</tr>
 
 <?php 
 $count++;
@@ -104,7 +116,9 @@ $count++;
 </table>
 </div>
 
-</form></body></html>
+</form>
+</body>
+</html>
 
 
 

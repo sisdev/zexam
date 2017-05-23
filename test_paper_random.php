@@ -1,4 +1,7 @@
 
+<style>
+	.clear{clear:both}}
+</style>
 <?php
 error_reporting(1);
 include("connection.php");
@@ -22,7 +25,7 @@ $chkArr=array();
 		}
 		
 	 
-	   echo "<table>";
+	   echo "<table border=1 width=100%><tr><th>Sr No</th><th>Question Description</th></tr>";
 	 while($row=mysqli_fetch_array($sel_q))
 	 {
 	$rand= $randArr[array_rand($randArr)]; 
@@ -51,12 +54,14 @@ $chkArr=array();
 		
 	 }	
 
-
+echo "</table>";
 	 
 ?>
 
-</table>
+
 <form method="post">
 <input type="hidden" name="id_array" value="<?php echo implode(",",$question_array); ?>">  <!--   converting $question_array into string -->
-<input type="submit" value="submit" name="random_ques">
+<input type="submit" value="Random Select Submit" name="random_ques" style="float:right;border:none;background:#337ab7;color:#FFFFFF;padding: 7px 15px;border-radius: 5px;margin-top:10px;margin-bottom:5%;">
+
+
 </form>

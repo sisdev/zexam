@@ -26,6 +26,19 @@ function subchange(itsval)
              }	
        }
 }
+
+//start delete function..
+function delbox()
+{
+	
+	var value=confirm("Do you really want to delete.");
+	if(value==true)
+		return true;
+	else
+		return false;
+}
+
+//end delete function..
 </script>
 <body>
 <h2 style="text-align:center; padding:0px 0 15px 0; margin:0px; text-decoration:underline;">LIST OF QUESTIONS</h2>
@@ -33,7 +46,7 @@ function subchange(itsval)
 
 $ques_list = "select * from question_master where created_by = '$user_name'" ;
 
-echo $ques_list."<BR>" ;
+//echo $ques_list."<BR>" ;
 
 $sel=mysqli_query($conn, $ques_list);
 
@@ -44,10 +57,11 @@ if ($ques_count == 0)
 	echo " No questions submitted by you" ;
 	exit(1) ;
 }
-echo " Total Questions Submitted: ". $ques_count ;	
+	
 ?>	
 
 Subject:- <select id="bysub" onChange="subchange(this.value)" style="margin-bottom:15px;">
+ <option value="select" selected>Select Subject </option>
 <?php
 $sub=mysqli_query($conn, "select subject_description,subject_id from subject where subject_id in (select distinct subject_id from question_master where created_by = '$user_name')");
 while($getSub=mysqli_fetch_array($sub))
@@ -59,36 +73,35 @@ while($getSub=mysqli_fetch_array($sub))
 </select>
 <div id="ques_by_sub">
 
-<?php
 
+<?php
+echo " Total Questions Submitted by $user_name : "."<b>". $ques_count."</b>" ;
 
 $count_sno=1;
 echo "<table border=1>" ;
-echo "<tr><th>&nbsp; Sno &nbsp;</th><th>&nbsp; Question Description &nbsp;</th><th>Modify</th><th>Delete</th><tr>";
+echo "<tr><th>&nbsp; Sno &nbsp;</th><th>&nbsp; Question Description &nbsp;</th><th>&nbsp; Modify &nbsp;</th><th>&nbsp; Delete &nbsp;</th><tr>";
 while($row=mysqli_fetch_array($sel))
 {
-echo "<tr><td>&nbsp;".$count_sno."</td><td>";
+echo "<tr><td>&nbsp;".$count_sno."</td><td>&nbsp;";
 echo $row["question_desc"];
-echo "</td><td><a href='teacher-page.php?res=$row[question_id]&qry=qlst_1'>&nbsp;Modify &nbsp;</a>";
-echo "</td><td><a href='teacher-page.php?res=$row[question_id]&qry=qlst_2'>&nbsp; Delete &nbsp;</a></td></tr>";
+echo "</td><td><a href='teacher-page.php?res=$row[question_id]&qry=qlst_1'>  Modify </a>";
+echo "</td><td><a href='teacher-page.php?res=$row[question_id]&qry=qlst_2' onclick='return delbox()'>  Delete </a></td></tr>";
 $count_sno+=1;
 }
 echo "</table>" ;
+
 $del=@$_GET['res'];
-mysqli_query($conn, "delete from question_master where question_id='$del' ");
-mysqli_query($conn, "delete from choice_master where question_id='$del'");
-
-/*?>$xml = new SimpleXMLElement('<xml/>');
-
-for ($i = 1; $i <= 8; ++$i) {
-    $track = $xml->addChild('track');
-    $track->addChild('path', "song$i.mp3");
-    $track->addChild('title', "Track $i - Track Title");
+if(isset($del)){
+	mysqli_query($conn, "delete from question_master where question_id='$del' ");
+	mysqli_query($conn, "delete from choice_master where question_id='$del'");
+	?>
+	<script>
+		window.location.href = "teacher-page.php?qry=list_ques";
+	</script>
+	<?php
 }
-
-Header('Content-type: text/xml');
-print($xml->asXML()); */
 ?>
+
 </div>
 
 

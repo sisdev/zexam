@@ -3,16 +3,6 @@ error_reporting(0);
 session_start();
 include("connection.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
- <head>
- <title>Online Exam</title>
- <script src="js/jquery-2.2.0.min.js" type="text/javascript">
-</script>
- 
- 
-  </head>
- <body>
 <div class="container-fluid" style="background-color: #f8f8f8;">
  <div class="templatemo-top-menu">
             <div class="container">

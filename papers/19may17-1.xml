@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Questionare duration="5" course="M.S. Office">
+  <Question number="1">
+    <QStr>A page break is used to do what?</QStr>
+    <topic>Word</topic>
+    <Item>Create a new page at the insertion point</Item>
+    <Item>Create a new page at the bottom of the docume</Item>
+    <Item>Create a new page that cannot be deleted</Item>
+    <Item>Create a blank page at the top of the documen</Item>
+    <Answer>2</Answer>
+  </Question>
+  <Question number="2">
+    <QStr>You can use other existing data sources with your master documents</QStr>
+    <topic>Other</topic>
+    <Item>Provided "the data source contains some field</Item>
+    <Item>the data source contains the same field names</Item>
+    <Item>the data source contains different field name</Item>
+    <Item>None of the above</Item>
+    <Answer>2</Answer>
+  </Question>
+  <Question number="3">
+    <QStr>What is the term used for the word processing programs that show you directly on the PC screen the appearance of your final document as you might expect when the document is printed on the paper.</QStr>
+    <topic>Word</topic>
+    <Item/>
+    <Item>Pagination</Item>
+    <Item>Soft Copy</Item>
+    <Item>WYSIWYG</Item>
+    <Answer>4</Answer>
+  </Question>
+  <Question number="4">
+    <QStr>Page break command of Excel on the Insert menu will result in insertion of page break</QStr>
+    <topic>Excel</topic>
+    <Item>Above the selected row</Item>
+    <Item>Below the selected row</Item>
+    <Item>Middle of the selected row</Item>
+    <Item>None of the above</Item>
+    <Answer>4</Answer>
+  </Question>
+  <Question number="5">
+    <QStr>Paste Special dialog box of Excel contains______options for</QStr>
+    <topic>Excel</topic>
+    <Item>Characteristics</Item>
+    <Item>Formats formulas</Item>
+    <Item>Values</Item>
+    <Item>All of the above</Item>
+    <Answer>4</Answer>
+  </Question>
+</Questionare>

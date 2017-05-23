@@ -50,6 +50,7 @@ session_start();
     </div>
   </div>
 </nav>
+
 <?php
 $testid=$_REQUEST['paperID'];
 $stdid=$_SESSION['userid'];
@@ -80,35 +81,31 @@ mysqli_query($conn, "insert into test_taken (test_id,student_id,test_start_dtm,s
 <input type="hidden" value=<?php echo $_GET['paperID']; ?> id="paperid">
 <div class="progress progress-striped active" style="height:10px;">
   <div class="progress-bar" style="width:100%"></div>
-</div>
+</div><!--progress-bad-div-->
+
+
 <div id="message">Time Left: </div>
 
-<div class="container" >
+<div class="container">
 <div class="row">
-<div class="col-sm-7" id="question-desc"></div>
+<div class="col-sm-7">
+	<div class="row">
+		<div class="col-sm-12" id="question-desc"></div>
+		<div class="col-sm-12">
+			<ul class="pager">
+
+  <li class="previous"><a  id="pullprev" href="javascript:;" >Previous</a></li>
+  <li ><a  id="review" href="javascript:;" >Mark as Review</a></li>
+  <li ><a  id="clear-resp" href="javascript:;" >Clear Response</a></li>
+
+  <li class="next"><a  id="pullnext" href="javascript:;" >Next</a></li>
+  </ul>
+		</div>
+	</div>
+</div>
 <div class="col-sm-1" ></div>
 <div class="col-sm-4">
- <a   id="submit-test" href="javascript:;">submit</a>
- <script>
- $("#submit-test").click(function(){
-	
-	 alert("Your Test paper submitted! Thank you");
-window.location.href="teacher-page.php?qry=my_testpaper";
-	  var sessionid_onsubmit=$("#sessionid").val();
-
-	 $.post("test_paper_ajax.php",
-	 {
-		Sessionid_onsubmit:sessionid_onsubmit
-	
-		 
-	 },
-	 function(data,status){
-	
-	 });
-	
- });
- </script>
- <div class="panel panel-primary">
+ <div class="panel panel-primary" style="background:#eae5e5;">
 		  <?php
 		  $duration=mysqli_query($conn, "select duration from test_paper where paper_id='".$_REQUEST['paperID']."'");
 		  $due=mysqli_fetch_array($duration);
@@ -123,7 +120,7 @@ window.location.href="teacher-page.php?qry=my_testpaper";
 	  
 	    <input type="hidden" value=<?php echo $no_of_ques; ?> id="total_counts">
       <div class="panel-body">
-	  <div class="row">
+	<!--  <div class="row">-->
 	  <?php 
   
 	  $quick_count=1;
@@ -148,32 +145,44 @@ $no_of_ques--; $quick_count++; }
 	  ?>
 
 
-	  </div>
-	
-	  </div>
+<!--</div>-->	
+	  </div><!--pannel body-->
 	  
-    </div>
+    </div><!--pannel primary-->
+	
+	<a   id="submit-test" href="javascript:;" style="background:#337ab7; padding:10px; color:#FFFFFF; border-radius:10px; border:none;">submit</a>
+ <script>
+ $("#submit-test").click(function(){
+	
+	 alert("Your Test paper submitted! Thank you");
+window.location.href="teacher-page.php?qry=my_testpaper";
+	  var sessionid_onsubmit=$("#sessionid").val();
+
+	 $.post("test_paper_ajax.php",
+	 {
+		Sessionid_onsubmit:sessionid_onsubmit
+	
+		 
+	 },
+	 function(data,status){
+	
+	 });
+	
+ });
+ </script>
 	
 	   
-</div>
+</div><!--col-sm-4-->
 
-</div>
-<div class="row">
+<!--</div>
+-->
+<!--row-1-->
 
-	<div class="col-sm-7">
-	<ul class="pager">
+<!--<div class="row" style="border:#000000  solid 1px;">-->
 
-  <li class="previous"><a  id="pullprev" href="javascript:;" >Previous</a></li>
-  <li ><a  id="review" href="javascript:;" >Mark as Review</a></li>
-  <li ><a  id="clear-resp" href="javascript:;" >Clear Response</a></li>
+</div><!--row-2-->
 
-  <li class="next"><a  id="pullnext" href="javascript:;" >Next</a></li>
-  </ul>
-  
-</div>
-
-</div>
-</div>
+</div><!--conatainer div-->
 	
 	<script>	
 	$(document).ready(function(){

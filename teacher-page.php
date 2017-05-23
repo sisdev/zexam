@@ -5,20 +5,6 @@ if(!isset($_SESSION['login']))
 {
 	header("location:index.php");
 }
-
-$sql_query1 = "select exam_role from users where id='".$_SESSION['userid']."'";
-#$sql_query1 = "select exam_role from users where id='116'";
-
-$chk=mysqli_query($user_conn,$sql_query1);
-if (!$chk) {
-	echo $sql_query1 ;	
-    printf("Error: %s\n", mysqli_error($user_conn));
-    exit();
-}
-$res=mysqli_fetch_array($chk);
-
-$exam_role = $res['exam_role'] ;
-echo "Role:".$exam_role ;
 ?>
 
 <?php include('header-2.php'); ?>
@@ -31,15 +17,41 @@ echo "Role:".$exam_role ;
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js" type="text/javascript"></script>
-  <title>Assessment Web</title>
+  <meta name="author" content="Sisoft Instructor">
+  
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+  <title>Online Testing/Assessment - Home Page</title>
   </head>
   <body>
 
+  <div class="container">
+	<div class="row">
+	<button type="button" class="btn-danger" style="float:right; border:none; margin-top:10px; padding:10px; font-weight:bold;">
+	<?php
+	$sql_query1 = "select exam_role from users where id='".$_SESSION['userid']."'";
+	#$sql_query1 = "select exam_role from users where id='116'";
+	
+	$chk=mysqli_query($user_conn,$sql_query1);
+	if (!$chk) {
+		echo $sql_query1 ;	
+		printf("Error: %s\n", mysqli_error($user_conn));
+		exit();
+	}
+	$res=mysqli_fetch_array($chk);
+	
+	$exam_role = $res['exam_role'] ;
+	echo "Role:".$exam_role ;
+	
+	?>
+	</button>
+	</div>
+</div>
+
+  
+  
 <div class="container">	
   <div><h2 style="color:#0066CC; margin-top:25px; margin-bottom:25px; text-align:center;">Online Exam/Assessment System</h2></div>
 </div>

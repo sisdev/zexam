@@ -153,9 +153,17 @@ case  "add_ques":
 	case "test_paper_view":
 	include("test_paper_view.php");
 	break;
+	
+	
 	case "test_paper_view_xml":
 	include("test_paper_view_xml.php");
 	break;
+	
+	case "test_paper_review":
+	include("test_paper_review.php");
+	break;
+
+	
 	case "assign_testpaper":
 	include("assign_testpaper.php");
 	break;
